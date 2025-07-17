@@ -1,58 +1,51 @@
-<h1>
-  social-media
-</h1>
+# Social Media
 
-**By:**  Kawthar Mohammad | Malak Jasim | Jawad Hassan |<br>
-**Date:** July / 17/ 2025 
-
-**[GitHub](https://github.com/Kawthara-M)** |
-**[LinkedIn](www.linkedin.com/in/kawthar-ahmad-331658361)**
+**Date:** July / 17/ 2025 <br>
+**By:** [Kawthar Mohammad](https://github.com/Kawthara-M) | [Malak Jasim](https://github.com/Malak1805) | [Jawad Hassan](https://github.com/Jawad-Hassan-J)
 
 ## Description
-A Social Media Website, Where Users Can Post, Communicate, And Navigate Withen Different Sections Withen The App.
 
+'X', a platform designed to simulate a social media expirence, where users can post, interact with other posts, and follow others. X is an application of MEN Stack, implemented to demonstrate back-end development skills following MVC architectural pattern.<br>
+-- include image--
 
 ## Getting Started
-| Deployed version of **[Cat-ch-It](https://cat-ch-it.surge.sh/)** |
 
-xxx
+To facilitate the development, several resources were generated throught the planning phase:
+
+- Entity Relationship Diagram (ERD): A diagram created to guide the development of schemas. |
+  [LucidChart](https://lucid.app/lucidchart/fe839a3d-ab38-4a1d-9f2b-ba8260569b1e/edit?viewport_loc=-573%2C93%2C1993%2C753%2C0_0&invitationId=inv_5c614da6-8cad-484f-adae-d3aa8441852f) |
+- Collaborative Board: A board shared among team memebers to assign tasks and track prograss. | 
+[Trello Board](https://trello.com/invite/b/6878ea401d81c643973da674/ATTI68ab95fd58f27aeffe35be35fc66d27f6F816D14/social-media-trello) |
+
+Upon the planning, development started and resulted in:
+
+| Deployed version of **[x]()** |
+
+
 
 ## Technologies Used
 
-- MEN STack
-
+- MongoDB, Express, Node.js (MEN Stack)
+- CSS
 
 ## User Stories
 
 xxx
 
-
 ## Wireframes
-
-
+**Home & Profile Previews**
 <br>
-<img src="preview.png"  width="50%" height="auto" style="vertical-align:middle;">
+<img src="images/home.jpg"  width="50%" height="auto" style="vertical-align:middle;">
+<br>
 
-<img src="preview2.png"  width="50%" height="auto" style="vertical-align:middle;">
+**Private Message & Search Previews**
+<br>
+<img src="images/privateAndSearch.jpg"  width="50%" height="auto" style="vertical-align:middle;">
 
+### **Future Enhancements**
 
-
-### **Future Updates**
 ---
 
-- More responsiveness to different devices
-- Audio to livesh the game
+### **Attributions**
 
-
-
-### **Credits**
 ---
-##### Images: [Flaticon](https://www.flaticon.com/search?word=cat)
-
-##### Dark Theme Guide: [FreeCodeCamp](https://www.freecodecamp.org/news/how-to-detect-a-users-preferred-color-scheme-in-javascript-ec8ee514f1ef/)
-
-##### Paw Movement Guide: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translateX)
-
-##### Touch Events Handlers Guide: [W3School](https://www.w3schools.com/jsref/event_touchstart.asp)
-
-

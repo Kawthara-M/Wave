@@ -1,0 +1,31 @@
+{
+  "name": "social-media",
+  "version": "1.0.0",
+  "description": "**Date:** July / 17/ 2025 <br>\r **By:** [Kawthar Mohammad](https://github.com/Kawthara-M) | [Malak Jasim](https://github.com/Malak1805) | [Jawad Hassan](https://github.com/Jawad-Hassan-J)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kawthara-M/social-media.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kawthara-M/social-media/issues"
+  },
+  "homepage": "https://github.com/Kawthara-M/social-media#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.16.4",
+    "morgan": "^1.10.0"
+  }
+}
