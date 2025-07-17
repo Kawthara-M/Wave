@@ -30,13 +30,10 @@ xxx
 ## Wireframes
 
 
-**Start Preview**
 <br>
-<img src="images/start.png"  width="50%" height="auto" style="vertical-align:middle;">
+<img src="preview.png"  width="50%" height="auto" style="vertical-align:middle;">
 
-**Arena Preview**
-<br>
-<img src="images/preview.png"  width="50%" height="auto" style="vertical-align:middle;">
+<img src="preview2.png"  width="50%" height="auto" style="vertical-align:middle;">
 
 
 
