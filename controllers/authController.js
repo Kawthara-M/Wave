@@ -24,7 +24,7 @@ exports.auth_signin_post = async (req, res) => {
 exports.auth_signout_get = async (req, res) => {
   try {
     req.session.destroy()
-    res.redirect("/")
+    res.redirect("/auth/sign-in")
   } catch (error) {
     console.error("An error has occurred signing out a user!", error.message)
   }
