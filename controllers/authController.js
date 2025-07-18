@@ -1,6 +1,7 @@
 const User = require("../models/User.js")
 const validatePassword = require("../validators/passwordValidator.js")
 const passValidator = require("../validators/passwordValidator.js")
+const validator = require("validator")
 const bcrypt = require("bcrypt")
 
 exports.auth_signup_get = async (req, res) => {
@@ -13,8 +14,17 @@ exports.auth_signup_get = async (req, res) => {
 exports.auth_signup_post = async (req, res) => {
   try {
     const userInDatabase = await User.findOne({ username: req.body.username })
+    const today = new Date()
+    const birthday = new Date(req.body.birthday)
+
+    if (today.getFullYear() - birthday.getFullYear() < 18) {
+      return res.send("X platform is for ages of 18 and more!")
+    }
     if (userInDatabase) {
       return res.send("Username already taken!") //should be shown near username field
+    }
+    if (!validator.isEmail(req.body.email)) {
+      return res.send("Invalid email!") //should be shown near email field
     }
     if (!validatePassword(req.body.password)) {
       return res.send("Weak Password! please follow -x- password policy:") // x replaced with project name
@@ -24,11 +34,10 @@ exports.auth_signup_post = async (req, res) => {
       return res.send("Password and confirm password must match...")
     }
 
-    //password encryption -- useing bcrypt
-    const hashedPassword = bcrypt.hashSync(req.body.password, 10) //max rounds is 15
+    const hashedPassword = bcrypt.hashSync(req.body.password, 10) 
     req.body.password = hashedPassword
     const user = await User.create(req.body)
-    res.send(`Thanks for signing up, ${user.username}`)
+    res.send(`Thanks for signing up, ${user.username}`)  //replace with directing to sign in page
   } catch (error) {
     console.error("An error has occurred signing up a user!", error.message)
   }
