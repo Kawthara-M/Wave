@@ -1,17 +1,46 @@
 const User = require("../models/User.js")
+const validatePassword = require("../validators/passwordValidator.js")
+const passValidator = require("../validators/passwordValidator.js")
 const bcrypt = require("bcrypt")
 
 exports.auth_signup_get = async (req, res) => {
   try {
-    //username taken, show little message "enter another name"
-    // if password not valid, "enter another password"
-    //if password and confirm password doesn't macth, tell them
-    //If everything is fine, direct user to login page
+    //render signup page
+  } catch (error) {
+    console.error("An error has occurred signing up a user!", error.message)
+  }
+}
+exports.auth_signup_post = async (req, res) => {
+  try {
+    const userInDatabase = await User.findOne({ username: req.body.username })
+    if (userInDatabase) {
+      return res.send("Username already taken!") //should be shown near username field
+    }
+    if (!validatePassword(req.body.password)) {
+      return res.send("Weak Password! please follow -x- password policy:") // x replaced with project name
+    }
+
+    if (req.body.password !== req.body.ConfirmPassword) {
+      return res.send("Password and confirm password must match...")
+    }
+
+    //password encryption -- useing bcrypt
+    const hashedPassword = bcrypt.hashSync(req.body.password, 10) //max rounds is 15
+    req.body.password = hashedPassword
+    const user = await User.create(req.body)
+    res.send(`Thanks for signing up, ${user.username}`)
   } catch (error) {
     console.error("An error has occurred signing up a user!", error.message)
   }
 }
 
+exports.auth_signin_get = async (req, res) => {
+  try {
+    //render signin page
+  } catch (error) {
+    console.error("An error has occurred signing in a user!", error.message)
+  }
+}
 exports.auth_signin_post = async (req, res) => {
   try {
     //if username or password aren't correct, "Username or Password arent correct"
