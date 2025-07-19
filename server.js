@@ -26,9 +26,9 @@ app.use(
 app.use(passUserToView)
 
 app.get("/", (req, res) => {
-  //res.render("index.ejs")
-  res.send("reached here")
+  res.render("index.ejs")
 })
+
 // Require Routes
 const authRouter = require("./routes/authRouter.js")
 // The following routes are commented until we start working on them and export them, otherwise they will create you errors ;)
@@ -38,6 +38,7 @@ const postRouter = require("./routes/postRouter.js")*/
 
 // Use Controllers
 app.use("/auth", authRouter)
+console.log("reached here")
 /*app.use("/user", isSignedIn, userRouter)
 app.use("/post", isSignedIn, postRouter)*/
 

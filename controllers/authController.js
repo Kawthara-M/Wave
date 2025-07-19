@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt")
 
 exports.auth_signup_get = async (req, res) => {
   try {
-    //render signup page
+    res.render("auth/sign-up.ejs")
   } catch (error) {
     console.error("An error has occurred signing up a user!", error.message)
   }
@@ -34,10 +34,10 @@ exports.auth_signup_post = async (req, res) => {
       return res.send("Password and confirm password must match...")
     }
 
-    const hashedPassword = bcrypt.hashSync(req.body.password, 10) 
+    const hashedPassword = bcrypt.hashSync(req.body.password, 10)
     req.body.password = hashedPassword
     const user = await User.create(req.body)
-    res.send(`Thanks for signing up, ${user.username}`)  //replace with directing to sign in page
+    res.send(`Thanks for signing up, ${user.username}`) //replace with directing to sign in page
   } catch (error) {
     console.error("An error has occurred signing up a user!", error.message)
   }
@@ -45,19 +45,42 @@ exports.auth_signup_post = async (req, res) => {
 
 exports.auth_signin_get = async (req, res) => {
   try {
-    //render signin page
+    res.render("auth/sign-in.ejs")
   } catch (error) {
     console.error("An error has occurred signing in a user!", error.message)
   }
 }
 exports.auth_signin_post = async (req, res) => {
   try {
-    //if username or password aren't correct, "Username or Password arent correct"
-    //direct user to home page
+    const userInDB = await User.findOne({ username: req.body.username })
+
+    // If user is not found, fail early
+    if (!userInDB) {
+      return res.send("Login failed, try again")
+    }
+
+    const validPassword = bcrypt.compareSync(
+      req.body.password,
+      userInDB.password
+    )
+
+    // If password is incorrect
+    if (!validPassword) {
+      return res.send("Login failed, try again")
+    }
+
+    req.session.user = {
+      username: userInDB.username,
+      _id: userInDB._id,
+    }
+    
+    res.redirect("/")
   } catch (error) {
     console.error("An error has occurred signing in a user!", error.message)
+    res.status(500).send("Internal Server Error")
   }
 }
+
 
 exports.auth_signout_get = async (req, res) => {
   try {
