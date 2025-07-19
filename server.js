@@ -12,6 +12,7 @@ const passUserToView = require("./middlewares/pass-user-to-view")
 require("dotenv").config()
 const PORT = process.env.PORT ? process.env.PORT : "3000"
 
+app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride("_method"))
 app.use(morgan("dev"))
@@ -23,6 +24,7 @@ app.use(
   })
 )
 app.use(passUserToView)
+
 
 app.get("/", (req, res) => {
   res.render("index.ejs")
