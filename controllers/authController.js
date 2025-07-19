@@ -30,8 +30,13 @@ exports.auth_signup_post = async (req, res) => {
       return res.send("Weak Password! please follow -x- password policy:") // x replaced with project name
     }
 
-    if (req.body.password !== req.body.ConfirmPassword) {
+    if (req.body.password !== req.body.confirmPassword) {
       return res.send("Password and confirm password must match...")
+    }
+    if (req.body.password == req.body.username) {
+      return res.send(
+        "Username and Password shouldn't be the same! That's not safe."
+      )
     }
 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10)
@@ -73,14 +78,13 @@ exports.auth_signin_post = async (req, res) => {
       username: userInDB.username,
       _id: userInDB._id,
     }
-    
+
     res.redirect("/")
   } catch (error) {
     console.error("An error has occurred signing in a user!", error.message)
     res.status(500).send("Internal Server Error")
   }
 }
-
 
 exports.auth_signout_get = async (req, res) => {
   try {
@@ -93,7 +97,8 @@ exports.auth_signout_get = async (req, res) => {
 
 exports.pass_edit_get = async (req, res) => {
   try {
-    // Show page for updating user password
+    const userInDB = await User.findById(req.params.id)
+    res.render("./auth/update-password.ejs", { userInDB })
   } catch (error) {
     console.error(
       "An error has occurred while directing user to update password form!",
@@ -104,10 +109,33 @@ exports.pass_edit_get = async (req, res) => {
 
 exports.pass_update_put = async (req, res) => {
   try {
-    //ask for user old password, if correct continue, else show "incorrect password
-    //if new password meets critera continue, else show msg of password policy
-    // if new password and confirm password dont match, show msg
-    // otherwise, update password in DB
+    const userInDB = await User.findById(req.params.id)
+
+    if (!userInDB) {
+      return res.send("No user with that ID exists!")
+    }
+
+    const validPassword = bcrypt.compareSync(
+      req.body.oldPassword,
+      userInDB.password
+    )
+    if (!validPassword) {
+      return res.send("Your old password is not correct! Please try again.")
+    }
+
+    if (!validatePassword(req.body.newPassword)) {
+      return res.send("Weak Password! please follow -x- password policy:") // x replaced with project name
+    }
+
+    if (req.body.newPassword !== req.body.confirmPassword) {
+      return res.send("Password and Confirm Password must match!")
+    }
+
+    const hashedPassword = bcrypt.hashSync(req.body.newPassword, 12)
+    userInDB.password = hashedPassword
+    await userInDB.save()
+
+    res.render("./users/profile.ejs", { userInDB })
   } catch (error) {
     console.error(
       "An error has occurred updating a user's password!",
