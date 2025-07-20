@@ -27,9 +27,14 @@
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      width: 40%;
+      width: 30%;
 
       margin-bottom: 2em;
+    }
+    @media (max-width: 500px) {
+      .card {
+        width: 70%;
+      }
     }
 
     .card-body {
@@ -50,24 +55,21 @@
 <div class="card text-center">
   <div class="card-body">
     <form action="/auth/sign-up" method="post" enctype="multipart/form-data">
-      <!-- Username -->
       <div class="mb-3 text-start">
         <label for="username" class="form-label">Username</label>
         <input type="text" name="username" class="form-control" id="remove" />
       </div>
 
-      <!-- Email -->
       <div class="mb-3 text-start">
         <label for="email" class="form-label">Email</label>
         <input type="email" name="email" class="form-control" id="remove" />
       </div>
 
-      <!-- Birthday -->
       <div class="mb-3 text-start">
         <label for="birthday" class="form-label">Birthday</label>
         <input type="date" name="birthday" class="form-control" id="remove" />
       </div>
-      <!-- Password -->
+
       <div class="mb-3 text-start">
         <label for="password" class="form-label">Password</label>
         <input
@@ -78,7 +80,6 @@
         />
       </div>
 
-      <!-- Confirm Password -->
       <div class="mb-3 text-start">
         <label for="confirmPassword" class="form-label">Confirm Password</label>
         <input
@@ -106,7 +107,7 @@
   </div>
 </div>
 
-<div class="card text-center" style="width: 40%; box-shadow: none">
+<div class="card text-center" style="width: 30%">
   <div class="card-body py-2">
     <small>Have an account? <a href="/auth/sign-in">Sign in</a></small>
   </div>

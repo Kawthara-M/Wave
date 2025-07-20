@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt")
 
 exports.auth_signup_get = async (req, res) => {
   try {
-    res.render("auth/sign-up.ejs")
+    res.render("./auth/sign-up.ejs")
   } catch (error) {
     console.error("An error has occurred signing up a user!", error.message)
   }
@@ -26,9 +26,9 @@ exports.auth_signup_post = async (req, res) => {
     if (!validator.isEmail(req.body.email)) {
       return res.send("Invalid email!") //should be shown near email field
     }
-    // if (!validatePassword(req.body.password)) {
-    //   return res.send("Weak Password! please follow -x- password policy:") // x replaced with project name
-    // }
+    if (!validatePassword(req.body.password)) {
+      return res.send("Weak Password! please follow -x- password policy:") // x replaced with project name
+    }
 
     if (req.body.password !== req.body.confirmPassword) {
       return res.send("Password and confirm password must match...")
@@ -38,9 +38,9 @@ exports.auth_signup_post = async (req, res) => {
         "Username and Password shouldn't be the same! That's not safe."
       )
     }
-       let profileImagePath = null
+    let profileImagePath = null
     if (req.file) {
-      profileImagePath = "/uploads/" + req.file.filename // Adjust if you serve files from a different base
+      profileImagePath = "/uploads/" + req.file.filename 
     }
 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10)
@@ -50,7 +50,7 @@ exports.auth_signup_post = async (req, res) => {
       email: req.body.email,
       password: hashedPassword,
       birthday: req.body.birthday,
-      profileImage: profileImagePath
+      profileImage: profileImagePath,
     })
     res.render("./auth/sign-in.ejs")
   } catch (error) {
@@ -67,11 +67,11 @@ exports.auth_signin_get = async (req, res) => {
 }
 exports.auth_signin_post = async (req, res) => {
   try {
+    console.log("Username received on login:", req.body.username)
     const userInDB = await User.findOne({ username: req.body.username })
 
-    // If user is not found, fail early
     if (!userInDB) {
-      return res.send("Login failed, try again")
+      return res.send("Login failed, try again, user dont exist")
     }
 
     const validPassword = bcrypt.compareSync(
@@ -88,12 +88,9 @@ exports.auth_signin_post = async (req, res) => {
       username: userInDB.username,
       _id: userInDB._id,
     }
-    console.log(req.session.user)
-
-    res.redirect("/")
+    res.redirect(`/`)
   } catch (error) {
     console.error("An error has occurred signing in a user!", error.message)
-    res.status(500).send("Internal Server Error")
   }
 }
 
