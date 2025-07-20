@@ -12,7 +12,8 @@ const passUserToView = require("./middlewares/pass-user-to-view")
 require("dotenv").config()
 const PORT = process.env.PORT ? process.env.PORT : "3000"
 
-app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
 app.use(morgan("dev"))
 app.use(
@@ -27,15 +28,17 @@ app.use(passUserToView)
 app.get("/", (req, res) => {
   res.render("index.ejs")
 })
+
 // Require Routes
 const authRouter = require("./routes/authRouter.js")
 // The following routes are commented until we start working on them and export them, otherwise they will create you errors ;)
 /*const userRouter = require("./routes/userRouter.js")
 const postRouter = require("./routes/postRouter.js")*/
 
-console.log("program reaches here")
+
 // Use Controllers
 app.use("/auth", authRouter)
+console.log("reached here")
 /*app.use("/user", isSignedIn, userRouter)
 app.use("/post", isSignedIn, postRouter)*/
 
