@@ -11,7 +11,7 @@ router.post("/sign-in", authrCtrl.auth_signin_post)
 
 router.get("/sign-out", authrCtrl.auth_signout_get)
 
-router.get("/update-password", authrCtrl.pass_edit_get)
-router.put("/update-password", authrCtrl.pass_update_put)
+router.get("/:id/update-password", authrCtrl.pass_edit_get)
+router.put("/:id", authrCtrl.pass_update_put)
 
 module.exports = router
