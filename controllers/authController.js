@@ -38,11 +38,21 @@ exports.auth_signup_post = async (req, res) => {
         "Username and Password shouldn't be the same! That's not safe."
       )
     }
+       let profileImagePath = null
+    if (req.file) {
+      profileImagePath = "/uploads/" + req.file.filename // Adjust if you serve files from a different base
+    }
 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10)
     req.body.password = hashedPassword
-    const user = await User.create(req.body)
-    res.send(`Thanks for signing up, ${user.username}`) //replace with directing to sign in page
+    const user = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: hashedPassword,
+      birthday: req.body.birthday,
+      profileImage: profileImagePath
+    })
+    res.render("./auth/sign-in.ejs")
   } catch (error) {
     console.error("An error has occurred signing up a user!", error.message)
   }
@@ -50,7 +60,7 @@ exports.auth_signup_post = async (req, res) => {
 
 exports.auth_signin_get = async (req, res) => {
   try {
-    res.render("auth/sign-in.ejs")
+    res.render("./auth/sign-in.ejs")
   } catch (error) {
     console.error("An error has occurred signing in a user!", error.message)
   }
