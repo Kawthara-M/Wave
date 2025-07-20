@@ -4,7 +4,7 @@ const multer = require("multer")
 const upload = multer({ dest: "uploads/" })
 
 router.get("/new", postCtrl.post_create_get)
-router.post("/", postCtrl.post_create_post)
+router.post("/", upload.single("postImage"),postCtrl.post_create_post)
 
 router.get("/", postCtrl.post_index_get)
 router.get("/:postId", postCtrl.post_show_get)
