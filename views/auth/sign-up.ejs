@@ -1,0 +1,31 @@
+<h1>Sign Up</h1>
+<form action="auth/sign-up" method="post">
+  <label for="username">Username</label>
+<input type="text" name="username" id="username" required/>
+<br><br>
+
+<label for="email">Email</label>
+<input type="email" name="email" id="email" required/>
+<br><br>
+
+<label for="password">Password:</label>
+<input type="password" name="password" id="password" required/>
+<br><br>
+
+<label for="confirmPassword">Confirm Password</label>
+<input type="password" name="confirmPassword" id="confirmPassword" required/>
+<br><br>
+
+<label for="birthday">Your Birthday</label>
+<input type="date" name="birthday" id="birthday" required/>
+<br><br>
+
+
+<form action="upload.php" method="post" enctype="multipart/form-data">
+  Upload Your Profile Picture:
+  <input type="file" name="fileToUpload" id="fileToUpload">
+  <input type="submit" value="Upload Image" name="submit">
+</form>
+
+<button type="submit">Sign up</button>
+</form>
