@@ -1,0 +1,75 @@
+const User = require("../models/User.js")
+const Post = require("../models/Post.js")
+
+exports.post_create_get = async (req, res) => {
+  try {
+    res.render("auth/new.ejs")
+  } catch (error) {
+    console.error("An error has occurred while directing user!", error.message)
+  }
+}
+
+exports.post_create_post = async (req, res) => {
+  try {
+    const user = await User.findById(req.body.user)
+    console.log(user)
+    const post = await Post.create({
+      description: req.body.description,
+      picture: req.body.picture,
+      user: user._id,
+    })
+
+    res.send("posted") //should direct to post page
+  } catch (error) {
+    console.error("An error has occurred creating a post!", error.message)
+  }
+}
+
+exports.post_index_get = async (req, res) => {
+  try {
+    res.render("posts/index.ejs")
+  } catch (error) {
+    console.error("An error has occurred while viewing posts!", error.message)
+  }
+}
+
+exports.post_show_get = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId)
+    res.render("./posts/show.ejs", { user: req.session.user, post })
+  } catch (error) {
+    console.error(
+      `An error has occurred while showing ${req.params.postId} post`,
+      error.message
+    )
+  }
+}
+
+exports.post_edit_get = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId)
+    res.render("./posts/edit.ejs", { post })
+  } catch (error) {
+    console.error(
+      "An error has occurred while directing to edit view!",
+      error.message
+    )
+  }
+}
+
+exports.post_update_put = async (req, res) => {
+  try {
+    const post = await Post.findByIdAndUpdate(req.params.postId, req.body)
+    res.redirect(`/posts/${recipe._id}`)
+  } catch (error) {
+    console.error("An error has occurred updating a post!", error.message)
+  }
+}
+exports.post_delete_delete = async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.postId)
+    res.render("./posts")
+  } catch (error) {
+    console.error("An error has occurred deleting a post!", error.message)
+  }
+}

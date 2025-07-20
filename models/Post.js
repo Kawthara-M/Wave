@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const postSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
+    ref: "User"
   },
   caption: String,
   like: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
+    ref: "User"
   }],
   comments: {
     type: Array,
@@ -18,12 +18,9 @@ const postSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  shares: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
-  }],
-  picture: String
+  picture: {type: String},
+  description: {type: String}
 })
 
 
-module.exports = mongoose.model("post", postSchema);
+module.exports = mongoose.model("Post", postSchema);

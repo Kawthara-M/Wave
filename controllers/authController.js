@@ -26,9 +26,9 @@ exports.auth_signup_post = async (req, res) => {
     if (!validator.isEmail(req.body.email)) {
       return res.send("Invalid email!") //should be shown near email field
     }
-    if (!validatePassword(req.body.password)) {
-      return res.send("Weak Password! please follow -x- password policy:") // x replaced with project name
-    }
+    // if (!validatePassword(req.body.password)) {
+    //   return res.send("Weak Password! please follow -x- password policy:") // x replaced with project name
+    // }
 
     if (req.body.password !== req.body.confirmPassword) {
       return res.send("Password and confirm password must match...")
@@ -78,6 +78,7 @@ exports.auth_signin_post = async (req, res) => {
       username: userInDB.username,
       _id: userInDB._id,
     }
+    console.log(req.session.user)
 
     res.redirect("/")
   } catch (error) {
