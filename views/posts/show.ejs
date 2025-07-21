@@ -1,14 +1,80 @@
-<p><%= post.description %></p>
-<img src="/uploads/<%= post.picture %>" alt="picture" width="300" />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post</title>
 
-<% if (user._id === post.user._id.toString()) { %>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style></style>
+  </head>
+  <body>
+    <div
+      class="container vh-100 d-flex justify-content-center align-items-center"
+    >
+      <div
+        class="card shadow-sm"
+        style="max-width: 500px; width: 100%; min-height: 250px"
+      >
+        <div
+          class="card-header d-flex justify-content-between align-items-center bg-white border-0 pb-0"
+        >
+          <a
+            href="javascript:history.back()"
+            class="text-decoration-none text-black fs-5"
+            >←</a
+          >
+          <span class="fw-bold"><%= post.user.username %></span>
+          <% if (user._id === post.user._id.toString()) { %>
+          <div class="dropdown">
+            <a
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              class="text-dark text-decoration-none"
+            >
+              &#x22EE;
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="/post/<%= post._id %>/edit"
+                  >Edit</a
+                >
+              </li>
+              <li>
+                <form
+                  action="/post/<%= post._id %>?_method=DELETE"
+                  method="POST"
+                  class="d-inline"
+                >
+                  <button type="submit" class="dropdown-item text-danger">
+                    Delete
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </div>
+          <% } %>
+        </div>
 
-<form action="/post/<%= post._id %>/edit">
-  <button>Edit</button>
-</form>
+        <img
+          src="/uploads/<%= post.picture %>"
+          class="card-img-top"
+          alt="Post Image"
+          style="height: 15em"
+        />
 
-<form action="/post/<%= post._id %>?_method=DELETE" method="POST">
-  <button type="submit">Delete</button>
-</form>
+        <div class="card-body">
+          <p class="card-text"><%= post.description %></p>
+        </div>
+      </div>
+    </div>
 
-<% } %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
