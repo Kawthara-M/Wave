@@ -27,6 +27,7 @@ exports.post_create_post = async (req, res) => {
 
 exports.post_index_get = async (req, res) => {
   try {
+    
     res.render("posts/index.ejs")
   } catch (error) {
     console.error("An error has occurred while viewing posts!", error.message)
@@ -73,3 +74,4 @@ exports.post_delete_delete = async (req, res) => {
     console.error("An error has occurred deleting a post!", error.message)
   }
 }
+
