@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+app.set('view engine','ejs')
 
 const mongoose = require("./config/db")
 const methodOverride = require("method-override")

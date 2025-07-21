@@ -12,14 +12,14 @@ exports.post_create_get = async (req, res) => {
 exports.post_create_post = async (req, res) => {
   try {
     const user = await User.findById(req.session.user)
-    console.log(user)
+
     const post = await Post.create({
       description: req.body.description,
-      picture: req.body.picture,
+      picture: req.file.filename,
       user: user._id,
     })
 
-    res.send("posted") //should direct to post page
+    res.redirect(`/post/${post._id}`)
   } catch (error) {
     console.error("An error has occurred creating a post!", error.message)
   }
@@ -61,7 +61,7 @@ exports.post_edit_get = async (req, res) => {
 exports.post_update_put = async (req, res) => {
   try {
     const post = await Post.findByIdAndUpdate(req.params.postId, req.body)
-    res.redirect(`/posts/${recipe._id}`)
+    res.redirect(`/post/${post._id}`)
   } catch (error) {
     console.error("An error has occurred updating a post!", error.message)
   }
@@ -69,7 +69,7 @@ exports.post_update_put = async (req, res) => {
 exports.post_delete_delete = async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.postId)
-    res.render("./posts")
+    res.redirect(`/users/${req.session.user._id}`)
   } catch (error) {
     console.error("An error has occurred deleting a post!", error.message)
   }

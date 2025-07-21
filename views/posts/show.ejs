@@ -1,18 +1,14 @@
-
-
-
 <p><%= post.description %></p>
-<img src="<%= post.picture %>" width="300" />
+<img src="/uploads/<%= post.picture %>" alt="picture" width="300" />
 
 <% if (user._id === post.user._id.toString()) { %>
-  
-<form action="/posts/<%= post._id %>/edit">
+
+<form action="/post/<%= post._id %>/edit">
   <button>Edit</button>
 </form>
 
-<form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+<form action="/post/<%= post._id %>?_method=DELETE" method="POST">
   <button type="submit">Delete</button>
 </form>
 
 <% } %>
-

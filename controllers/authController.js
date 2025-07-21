@@ -13,7 +13,6 @@ exports.auth_signup_get = async (req, res) => {
 }
 exports.auth_signup_post = async (req, res) => {
   try {
-    console.log(" req.file", req.file)
     const userInDatabase = await User.findOne({ username: req.body.username })
     const today = new Date()
     const birthday = new Date(req.body.birthday)
