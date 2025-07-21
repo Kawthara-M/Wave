@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { applyTimestamps } = require('./User');
 
 const postSchema = mongoose.Schema({
   user: {
@@ -20,7 +21,7 @@ const postSchema = mongoose.Schema({
   },
   picture: {type: String},
   description: {type: String}
-})
+}, {timestamps:true})
 
 
 module.exports = mongoose.model("Post", postSchema);
