@@ -1,8 +1,19 @@
 
 <h1>User's Profile</h1>
-<h2> Username <%= user.username %></h2>
-<img src="<%= user.profileImage %>" alt="Profile Picture" width="150" />
-<h2>Password <%= user.password %> </h2>
-<h2>Bio <%= user.Bio %></h2>
-<h2>Birthday <%= user.birthday %></h2>
+<h2> Username <%= userData.username %></h2>
+<img src="<%= userData.profileImage %>" alt="Profile Picture" width="150" />
+<h2>Bio <%= userData.Bio %></h2>
+<h2>Birthday <%= userData.birthday %></h2>
 <a href="/users/user._id/edit">Edit Profile</a>
+
+<h1>settings</h1>
+<h2>Password <%=  '•' * userData.password.length%> </h2>
+<a href="/auth/user._id/update-password">Change password</a>
+
+<% userData.posts.forEach((post)=> {
+  <h1><%=  post.user.username %></h1>
+    <p><%=  post.description %></p>
+    <img src="post.picture">
+
+   %>
+<% }) %>
