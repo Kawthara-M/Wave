@@ -9,6 +9,8 @@ const session = require("express-session")
 const isSignedIn = require("./middlewares/is-signed-in")
 const passUserToView = require("./middlewares/pass-user-to-view")
 
+app.use(express.static("public"))
+
 require("dotenv").config()
 const PORT = process.env.PORT ? process.env.PORT : "3000"
 
@@ -32,13 +34,12 @@ app.get("/", (req, res) => {
 // Require Routes
 const authRouter = require("./routes/authRouter.js")
 // The following routes are commented until we start working on them and export them, otherwise they will create you errors ;)
-/*const userRouter = require("./routes/userRouter.js")*/
+const userRouter = require("./routes/userRouter.js")
 const postRouter = require("./routes/postRouter.js")
-
 
 // Use Controllers
 app.use("/auth", authRouter)
-/*app.use("/user", isSignedIn, userRouter)*/
+app.use("/users", isSignedIn, userRouter)
 app.use("/post", isSignedIn, postRouter)
 
 app.listen(PORT, () => {

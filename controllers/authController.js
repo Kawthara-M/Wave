@@ -13,6 +13,7 @@ exports.auth_signup_get = async (req, res) => {
 }
 exports.auth_signup_post = async (req, res) => {
   try {
+    console.log(" req.file", req.file)
     const userInDatabase = await User.findOne({ username: req.body.username })
     const today = new Date()
     const birthday = new Date(req.body.birthday)
@@ -38,10 +39,14 @@ exports.auth_signup_post = async (req, res) => {
         "Username and Password shouldn't be the same! That's not safe."
       )
     }
-    let profileImagePath = null
-    if (req.file) {
-      profileImagePath = "/uploads/" + req.file.filename 
-    }
+    // let profileImagePath = null
+    // if (req.file) {
+    //   profileImagePath =
+    //   `/uploads/${req.file.filename}`
+
+    //    profileImagePath +='.png'
+
+    // }
 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10)
     req.body.password = hashedPassword
@@ -50,7 +55,7 @@ exports.auth_signup_post = async (req, res) => {
       email: req.body.email,
       password: hashedPassword,
       birthday: req.body.birthday,
-      profileImage: profileImagePath,
+      profileImage: req.file.filename,
     })
     res.render("./auth/sign-in.ejs")
   } catch (error) {
@@ -67,7 +72,6 @@ exports.auth_signin_get = async (req, res) => {
 }
 exports.auth_signin_post = async (req, res) => {
   try {
-    console.log("Username received on login:", req.body.username)
     const userInDB = await User.findOne({ username: req.body.username })
 
     if (!userInDB) {
@@ -88,7 +92,7 @@ exports.auth_signin_post = async (req, res) => {
       username: userInDB.username,
       _id: userInDB._id,
     }
-    res.redirect(`/`)
+    res.redirect(`../users/${req.session.user._id}`)
   } catch (error) {
     console.error("An error has occurred signing in a user!", error.message)
   }
