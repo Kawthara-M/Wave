@@ -9,3 +9,12 @@
 <h2>Password <%= '•'.repeat(8)%></h2>
 <a href="/auth/user._id/update-password">Change password</a>
 <a href="/post/new">add post</a>
+
+<% userData.posts.forEach((post)=> { %>
+  <br>
+  <br>
+<img src="/uploads/<%= post.picture %>" />
+<p><%= post.description %></p>
+<br>
+
+<%}) %>
