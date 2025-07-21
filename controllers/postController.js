@@ -3,7 +3,7 @@ const Post = require("../models/Post.js")
 
 exports.post_create_get = async (req, res) => {
   try {
-    res.render("auth/new.ejs")
+    res.render("posts/new.ejs")
   } catch (error) {
     console.error("An error has occurred while directing user!", error.message)
   }
@@ -11,7 +11,7 @@ exports.post_create_get = async (req, res) => {
 
 exports.post_create_post = async (req, res) => {
   try {
-    const user = await User.findById(req.body.user)
+    const user = await User.findById(req.session.user)
     console.log(user)
     const post = await Post.create({
       description: req.body.description,
