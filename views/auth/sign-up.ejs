@@ -28,7 +28,13 @@
       flex-direction: column;
       justify-content: space-around;
       width: 30%;
+
       margin-bottom: 2em;
+    }
+    @media (max-width: 500px) {
+      .card {
+        width: 70%;
+      }
     }
 
     .card-body {
@@ -37,11 +43,9 @@
       justify-content: space-around;
     }
 
-    #exampleInputEmail1:focus,
-    #exampleInputPassword1:focus {
+    #remove {
       outline: none;
       box-shadow: none;
-      border-color: black;
     }
   </style>
 </head>
@@ -50,34 +54,40 @@
 
 <div class="card text-center">
   <div class="card-body">
-    <form action="auth/sign-up" method="post" enctype="multipart/form-data">
-      <!-- Username -->
+    <form action="/auth/sign-up" method="post" enctype="multipart/form-data">
       <div class="mb-3 text-start">
         <label for="username" class="form-label">Username</label>
-        <input type="text" name="username" class="form-control" />
+        <input type="text" name="username" class="form-control" id="remove" />
       </div>
 
-      <!-- Email -->
       <div class="mb-3 text-start">
         <label for="email" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" />
+        <input type="email" name="email" class="form-control" id="remove" />
       </div>
 
-      <!-- Birthday -->
       <div class="mb-3 text-start">
         <label for="birthday" class="form-label">Birthday</label>
-        <input type="date" name="birthday" class="form-control" />
-      </div>
-      <!-- Password -->
-      <div class="mb-3 text-start">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" />
+        <input type="date" name="birthday" class="form-control" id="remove" />
       </div>
 
-      <!-- Confirm Password -->
+      <div class="mb-3 text-start">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          id="remove"
+        />
+      </div>
+
       <div class="mb-3 text-start">
         <label for="confirmPassword" class="form-label">Confirm Password</label>
-        <input type="password" name="confirmPassword" class="form-control" />
+        <input
+          type="password"
+          name="confirmPassword"
+          class="form-control"
+          id="remove"
+        />
       </div>
 
       <div class="mb-4 text-start">
@@ -86,8 +96,8 @@
         >
         <input
           type="file"
-          name="profilePicture"
-          id="fileToUpload"
+          name="profileImage"
+          id="profileImage"
           class="form-control"
         />
       </div>
@@ -97,6 +107,8 @@
   </div>
 </div>
 
-<div class="card text-center">
-  <div class="card-body">Have an account? Log in</div>
+<div class="card text-center" style="width: 30%">
+  <div class="card-body py-2">
+    <small>Have an account? <a href="/auth/sign-in">Sign in</a></small>
+  </div>
 </div>
