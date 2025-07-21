@@ -32,8 +32,9 @@ exports.user_edit_get = async (req, res) => {
 
 exports.user_update_put = async (req, res) => {
   try {
-    const currentUser = await User.findByIdAndUpdate(req.session.user._id,req.body,req.file.filename)
+    const currentUser = await User.findByIdAndUpdate(req.session.user._id,req.body,req.file.profileImage)
      const user = await User.findById(req.session.user._id)
+    const posts = await Post.find({ user: user._id })
 
     const userData = {
       _id: user._id,
@@ -41,7 +42,7 @@ exports.user_update_put = async (req, res) => {
       picture: user.profileImage,
       birthday:user.birthday,
       bio:user.bio,
-      posts: user.posts,
+      posts: posts,
     }
 
     //currentUser.set(req.body)
