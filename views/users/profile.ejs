@@ -3,7 +3,7 @@
 <img src="/uploads/<%= userData.picture %>" width="150" />
 <h2>Bio <%= userData.Bio %></h2>
 <h2>Birthday <%= userData.birthday %></h2>
-<a href="/users/user._id/edit">Edit Profile</a>
+<a href="/users/<%= userData._id %>/edit">Edit Profile</a>
 
 <h1>settings</h1>
 <h2>Password <%= '•'.repeat(8)%></h2>

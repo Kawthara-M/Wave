@@ -1,20 +1,20 @@
 <h2>Edit Profile</h2>
 
-<form action="users/Profile" method="post">
+<form action="../../users/<%= user._id %>?_method=PUT" method="POST">
 
-<label for="ProfileImage">Change Profile Picture</label>
+<label for="profileImage">Change Profile Picture</label>
 <input type="file" name="profileImage" id="profileImage"required/>
 
   <label for="username">Change Username:</label>
-  <input type="text" name="username" value="username" required/>
+  <input type="text" name="username" required/>
   <br>
   
 <label for="email">Change Email:</label>
 <input type="email" name="email" id="email" required/>
 <br>
 
-<label for="email">Change Bio:</label>
-<input type="email" name="email" id="email" required/>
+<label for="bio">Change Bio:</label>
+<input type="text" name="bio" id="bio" required/>
 <br>
 
 
