@@ -42,7 +42,7 @@ const postRouter = require("./routes/postRouter.js")
 // Use Controllers
 app.use("/auth", authRouter)
 app.use("/users", isSignedIn, userRouter)
-app.use("/post", isSignedIn, postRouter)
+app.use("/posts", isSignedIn, postRouter)
 
 
 
