@@ -1,6 +1,6 @@
 const User = require("../models/User.js")
 const Post = require("../models/Post.js")
-
+const Comment= require('../models/Comment.js')
 exports.post_create_get = async (req, res) => {
   try {
     res.render("posts/new.ejs")
@@ -37,7 +37,9 @@ exports.post_index_get = async (req, res) => {
 exports.post_show_get = async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId)
-    res.render("./posts/show.ejs", { user: req.session.user, post })
+    
+    const comments= await Comment.find({ post: req.params.postId})
+    res.render("./posts/show.ejs", { user: req.session.user, post, comments})
   } catch (error) {
     console.error(
       `An error has occurred while showing ${req.params.postId} post`,
@@ -72,6 +74,21 @@ exports.post_delete_delete = async (req, res) => {
     res.redirect(`/users/${req.session.user._id}`)
   } catch (error) {
     console.error("An error has occurred deleting a post!", error.message)
+  }
+}
+
+exports.comment_create_post= async(req,res)=> {
+  try {
+
+    const post=await User.findById(req.params.postId)
+    const comment = await Comment.create({
+      post: req.params.postId,
+      description: req.body.comment,
+    })
+    console.log(comment)
+    res.redirect(`/post/${req.params.postId}`)
+  } catch (error) {
+    console.error("An error has occurred creating a comment!", error.message)
   }
 }
 
