@@ -10,6 +10,7 @@ const session = require("express-session")
 const isSignedIn = require("./middlewares/is-signed-in")
 const passUserToView = require("./middlewares/pass-user-to-view")
 
+
 app.use(express.static("public"))
 
 require("dotenv").config()
@@ -41,7 +42,9 @@ const postRouter = require("./routes/postRouter.js")
 // Use Controllers
 app.use("/auth", authRouter)
 app.use("/users", isSignedIn, userRouter)
-app.use("/post", isSignedIn, postRouter)
+app.use("/posts", isSignedIn, postRouter)
+
+
 
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}`)
