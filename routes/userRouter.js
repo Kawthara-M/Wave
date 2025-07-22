@@ -1,6 +1,6 @@
 const router = require("express").Router()
 
-const userController = require("../controllers/userController.js")
+const userCtrl = require("../controllers/userController.js")
 
 const multer = require("multer")
 
@@ -16,18 +16,20 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-router.get("/:id", userController.user_show_get)
-router.get("/:id/edit", userController.user_edit_get)
+router.get("/:id", userCtrl.user_show_get)
+router.get("/:id/edit", userCtrl.user_edit_get)
 router.put(
   "/:id",
   upload.single("profileImage"),
-  userController.user_update_put
+  userCtrl.user_update_put
 )
 router.put(
   "/:id",
   upload.single("profileImage"),
-  userController.user_update_put
+  userCtrl.user_update_put
 )
-router.post("/search", userController.user_search_post)
+router.delete("/:userId", userCtrl.user_delete_delete)
+router.post("/search", userCtrl.user_search_post)
+
 
 module.exports = router

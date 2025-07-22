@@ -65,6 +65,28 @@
           <li>
             <a href="/auth/sign-out" class="dropdown-item">Sign out</a>
           </li>
+          <li>
+            <form
+              action="/users/<%= userData._id %>?_method=DELETE"
+              method="POST"
+              onsubmit="return confirm('Are you sure you want to delete your account?');"
+              style="margin: 0"
+            >
+              <button
+                type="submit"
+                class="dropdown-item"
+                style="
+                  all: unset;
+                  cursor: pointer;
+                  display: block;
+                  width: 100%;
+                  padding: 0.25rem 1rem;
+                "
+              >
+                Delete Account
+              </button>
+            </form>
+          </li>
         </ul>
       </div>
       <% } %>
