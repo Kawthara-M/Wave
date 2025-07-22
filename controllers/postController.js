@@ -40,7 +40,7 @@ exports.post_index_get = async (req, res) => {
 
 exports.post_show_get = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.postId).populate('user')
+    const post = await Post.findById(req.params.postId).populate("user")
     const comments = await Comment.find({ post: req.params.postId }).populate(
       "user"
     )

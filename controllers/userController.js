@@ -19,7 +19,10 @@ exports.user_show_get = async (req, res) => {
       posts: posts,
     }
 
-    res.render("./users/profile.ejs", { userData,loggedInUserId: req.session.user ? req.session.user._id.toString() : null, })
+    res.render("./users/profile.ejs", {
+      userData,
+      loggedInUserId: req.session.user ? req.session.user._id.toString() : null,
+    })
   } catch (error) {
     console.error("An error has occurred rendering a profile!", error.message)
   }
@@ -75,8 +78,8 @@ exports.user_search_post = async (req, res) => {
     if (!users || users.length === 0)
       res.status(400).send({ error: "No user was found" })
 
-    const firstUser = users[0];
-    res.redirect(`/users/${firstUser._id}`);
+    const firstUser = users[0]
+    res.redirect(`/users/${firstUser._id}`)
   } catch (error) {
     console.error("An error has occurred searching a username!", error.message)
   }

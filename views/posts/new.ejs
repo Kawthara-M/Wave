@@ -1,17 +1,12 @@
 <h2>add post</h2>
 
 <form action="/posts" method="POST" enctype="multipart/form-data">
+  <label for="picture">Post picture</label>
+  <input type="file" name="picture" id="picture" required />
 
-<label for="picture">Post picture</label>
-<input type="file" name="picture" id="picture"required/>
+  <label for="description">description:</label>
+  <input type="text" name="description" id="description" />
+  <br />
 
-
-<label for="description">description:</label>
-<input type="text" name="description" id="description"/>
-<br>
-
-
-<button type="submit">Add</button>
-
-
+  <button type="submit">Add</button>
 </form>

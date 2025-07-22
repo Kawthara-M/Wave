@@ -38,15 +38,6 @@ exports.auth_signup_post = async (req, res) => {
         "Username and Password shouldn't be the same! That's not safe."
       )
     }
-    // let profileImagePath = null
-    // if (req.file) {
-    //   profileImagePath =
-    //   `/uploads/${req.file.filename}`
-
-    //    profileImagePath +='.png'
-
-    // }
-
     const hashedPassword = bcrypt.hashSync(req.body.password, 10)
     req.body.password = hashedPassword
     const user = await User.create({
@@ -135,7 +126,7 @@ exports.pass_update_put = async (req, res) => {
     }
 
     if (!validatePassword(req.body.newPassword)) {
-      return res.send("Weak Password! please follow -x- password policy:") // x replaced with project name
+      return res.send("Weak Password! please follow Wave password policy:") // What's the policy?
     }
 
     if (req.body.newPassword !== req.body.confirmPassword) {
