@@ -19,7 +19,7 @@ schema
   .spaces()
   .is()
   .not()
-  .oneOf(["Passw0rd", "Password123"]) //include username too after setting the User schema
+  .oneOf(["Passw0rd", "Password123"])
 
 const validatePassword = (password) => {
   return schema.validate(password)
