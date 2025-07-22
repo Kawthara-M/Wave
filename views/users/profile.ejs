@@ -26,38 +26,37 @@
   <body>
     <%- include("../partials/header.ejs") %>
     <div class="container mt-5 profile shadow-lg position-relative">
-      <div class="dropdown position-absolute" style="top: 15px; right: 10px">
-        <a
-          href="#"
-          role="button"
-          id="settingsDropdown"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-          title="Settings"
-        >
-          <img src="/uploads/setting.png" style="width: 1.5em; height: 1.5em" />
-        </a>
+      
+      <% if (loggedInUserId && loggedInUserId === userData._id.toString()) { %>
+  <div class="dropdown position-absolute" style="top: 15px; right: 10px">
+    <a
+      href="#"
+      role="button"
+      id="settingsDropdown"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+      title="Settings"
+    >
+      <img src="/uploads/setting.png" style="width: 1.5em; height: 1.5em" />
+    </a>
 
-        <ul
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="settingsDropdown"
-        >
-          <li>
-            <a
-              class="dropdown-item"
-              href="/auth/<%= userData._id %>/update-password"
-              >Update Password</a
-            >
-          </li>
-          <li>
-            <a class="dropdown-item" href="/settings/theme">Theme Option</a>
-          </li>
-            <li>
-             <a href="/users/<%= userData._id %>/edit" class="dropdown-item"
-            >Edit Profile</a>
-          </li>
-        </ul>
-      </div>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingsDropdown">
+      <li>
+        <a class="dropdown-item" href="/auth/<%= userData._id %>/update-password">Update Password</a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="/settings/theme">Theme Option</a>
+      </li>
+      <li>
+        <a href="/users/<%= userData._id %>/edit" class="dropdown-item">Edit Profile</a>
+      </li>
+      <li>
+        <a href="/auth/sign-out" class="dropdown-item">Sign out</a>
+      </li>
+    </ul>
+  </div>
+<% } %>
+
 
       <div class="d-flex align-items-center mb-4">
         <img
@@ -98,10 +97,6 @@
 
 
       </div>
-
-
-
-
       <div class="row g-1">
         <% userData.posts.forEach((post) => { %>
         <div class="col-12 col-sm-6 col-md-4">

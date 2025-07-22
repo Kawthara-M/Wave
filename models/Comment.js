@@ -5,7 +5,6 @@ const commentSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post",
   },
-  caption: String,
   likes: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -14,12 +13,14 @@ const commentSchema = mongoose.Schema({
   ],
   description: {
     type: String,
-    default: [],
+    default: "",
   },
-  replies: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
+  replies: [{
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "User",
+}],
+  user: { type: mongoose.Schema.Types.ObjectId,
+     ref: "User" }
 })
 
 module.exports = mongoose.model("Comment", commentSchema)

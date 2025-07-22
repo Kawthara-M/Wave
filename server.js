@@ -30,12 +30,11 @@ app.use(
 app.use(passUserToView)
 
 app.get("/", (req, res) => {
-  res.render("index.ejs")
+  res.redirect("/auth/sign-in")
 })
 
 // Require Routes
 const authRouter = require("./routes/authRouter.js")
-// The following routes are commented until we start working on them and export them, otherwise they will create you errors ;)
 const userRouter = require("./routes/userRouter.js")
 const postRouter = require("./routes/postRouter.js")
 
