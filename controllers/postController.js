@@ -19,7 +19,9 @@ exports.post_create_post = async (req, res) => {
       user: user._id,
     })
 
-    res.redirect(`/post/${post._id}`)
+    // old  res.redirect(`/post/${post._id}`)
+    //new go to profile res.redirect(`/users/${user._id}`)
+    res.redirect(`/users/${user._id}`)
   } catch (error) {
     console.error("An error has occurred creating a post!", error.message)
   }
