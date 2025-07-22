@@ -1,0 +1,36 @@
+<footer class="footer">
+  <a href="/"><i class="fas fa-home"></i></a>
+  <a href="/post/new"><i class="fas fa-plus-square"></i></a>
+  <a href="/users/<%= user._id %>"><i class="fas fa-user"></i></a>
+</footer>
+
+<style>
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    padding: 0 40px;
+  }
+
+  .footer a {
+    color: #555;
+    font-size: 25px;
+    text-decoration: none;
+    width: 33%;
+    text-align: center;
+  }
+
+  .footer a:hover {
+    color: #000;
+  }
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

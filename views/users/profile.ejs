@@ -51,6 +51,10 @@
           <li>
             <a class="dropdown-item" href="/settings/theme">Theme Option</a>
           </li>
+            <li>
+             <a href="/users/<%= userData._id %>/edit" class="dropdown-item"
+            >Edit Profile</a>
+          </li>
         </ul>
       </div>
 
@@ -86,15 +90,19 @@
             </div>
           </div>
           <p class="mb-1"><%= userData.bio %></p>
-          <a href="/users/<%= userData._id %>/edit" class="btn btn-sm btn-dark"
-            >Edit Profile</a
-          >
+
+          
+          
         </div>
+
+
       </div>
 
+      
+      <!-- remove this
       <div class="mb-5">
         <a href="/post/new" class="btn btn-sm btn-dark">Add Post</a>
-      </div>
+      </div> -->
 
       <div class="row g-1">
         <% userData.posts.forEach((post) => { %>
@@ -111,5 +119,6 @@
         <% }) %>
       </div>
     </div>
+    <%- include("../partials/footer") %>
   </body>
 </html>
