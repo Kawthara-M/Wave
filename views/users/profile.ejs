@@ -1,20 +1,115 @@
-<h1>User's Profile</h1>
-<h2>Username <%= userData.username %></h2>
-<img src="/uploads/<%= userData.picture %>" width="150" />
-<h2>Bio <%= userData.Bio %></h2>
-<h2>Birthday <%= userData.birthday %></h2>
-<a href="/users/<%= userData._id %>/edit">Edit Profile</a>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= userData.username %>'s Profile</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<h1>settings</h1>
-<h2>Password <%= '•'.repeat(8)%></h2>
-<a href="/auth/user._id/update-password">Change password</a>
-<a href="/post/new">add post</a>
+    <style>
+      #profileImage {
+        border: solid 1px black;
+      }
+      .profile {
+        background-color: rgb(239, 232, 232);
+      }
+      .card-img-top {
+        width: 100%;
+        height: 200px; /* or any height you prefer */
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5 profile shadow-lg position-relative">
+      <div class="dropdown position-absolute" style="top: 15px; right: 10px">
+        <a
+          href="#"
+          role="button"
+          id="settingsDropdown"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          title="Settings"
+        >
+          <img src="/uploads/setting.png" style="width: 1.5em; height: 1.5em" />
+        </a>
 
-<% userData.posts.forEach((post)=> { %>
-  <br>
-  <br>
-<img src="/uploads/<%= post.picture %>" />
-<p><%= post.description %></p>
-<br>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="settingsDropdown"
+        >
+          <li>
+            <a
+              class="dropdown-item"
+              href="/auth/<%= userData._id %>/update-password"
+              >Update Password</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="/settings/theme">Theme Option</a>
+          </li>
+        </ul>
+      </div>
 
-<%}) %>
+      <div class="d-flex align-items-center mb-4">
+        <img
+          src="/uploads/<%= userData.picture %>"
+          class="rounded-circle me-4"
+          style="width: 120px; height: 120px"
+          alt="Profile Picture"
+          id="profileImage"
+        />
+        <div>
+          
+          <h3 class="mb-1"><%= userData.username %></h3>
+          <div class="d-flex mb-3 text-center">
+            <div class="me-4">
+              <strong><%= userData.posts.length %></strong>
+              <small>Posts</small>
+            </div>
+            <div class="me-4">
+              <strong
+                ><%= userData.followers ? userData.followers.length : 0
+                %></strong
+              >
+              <small>Followers</small>
+            </div>
+            <div>
+              <strong
+                ><%= userData.following ? userData.following.length : 0
+                %></strong
+              >
+              <small>Following</small>
+            </div>
+          </div>
+          <p class="mb-1"><%= userData.bio %></p>
+          <a href="/users/<%= userData._id %>/edit" class="btn btn-sm btn-dark"
+            >Edit Profile</a
+          >
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <a href="/post/new" class="btn btn-sm btn-dark">Add Post</a>
+      </div>
+
+      <div class="row g-1">
+        <% userData.posts.forEach((post) => { %>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="card">
+            <a href="/post/<%= post._id%>"
+              ><img
+                src="/uploads/<%= post.picture %>"
+                class="card-img-top"
+                alt="User Post"
+            /></a>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>
