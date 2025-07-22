@@ -9,7 +9,6 @@ exports.user_show_get = async (req, res) => {
     const formattedBirthday = user.birthday
       ? format(new Date(user.birthday), "dd/MM/yyyy")
       : null
-    console.log(formattedBirthday)
 
     const userData = {
       _id: user._id,
@@ -20,7 +19,7 @@ exports.user_show_get = async (req, res) => {
       posts: posts,
     }
 
-    res.render("./users/profile.ejs", { userData })
+    res.render("./users/profile.ejs", { userData,loggedInUserId: req.session.user ? req.session.user._id.toString() : null, })
   } catch (error) {
     console.error("An error has occurred rendering a profile!", error.message)
   }
@@ -65,13 +64,20 @@ exports.user_update_put = async (req, res) => {
 }
 
 exports.user_search_post = async (req, res) => {
-  const queryString = req.body.search
-  const queryStrings = queryString.split(" ")
-  allQueries = []
-  queryStrings.forEach((element) => {
-    allQueries.push({ username: { $regex: String(element) } })
-  })
- const users = await User.find({$or : allQueries})
-    if(!users || users.length === 0) res.status(400).send({error : "No user was found"})
-    res.status(200).send(users)
+  try {
+    const queryString = req.body.search
+    const queryStrings = queryString.split(" ")
+    allQueries = []
+    queryStrings.forEach((element) => {
+      allQueries.push({ username: { $regex: String(element) } })
+    })
+    const users = await User.find({ $or: allQueries })
+    if (!users || users.length === 0)
+      res.status(400).send({ error: "No user was found" })
+
+    const firstUser = users[0];
+    res.redirect(`/users/${firstUser._id}`);
+  } catch (error) {
+    console.error("An error has occurred searching a username!", error.message)
+  }
 }
