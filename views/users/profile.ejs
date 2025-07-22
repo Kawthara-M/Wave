@@ -24,6 +24,7 @@
     </style>
   </head>
   <body>
+    <%- include("../partials/header.ejs") %>
     <div class="container mt-5 profile shadow-lg position-relative">
       <div class="dropdown position-absolute" style="top: 15px; right: 10px">
         <a
@@ -50,6 +51,10 @@
           </li>
           <li>
             <a class="dropdown-item" href="/settings/theme">Theme Option</a>
+          </li>
+            <li>
+             <a href="/users/<%= userData._id %>/edit" class="dropdown-item"
+            >Edit Profile</a>
           </li>
         </ul>
       </div>
@@ -86,15 +91,20 @@
             </div>
           </div>
           <p class="mb-1"><%= userData.bio %></p>
-          <a href="/users/<%= userData._id %>/edit" class="btn btn-sm btn-dark"
-            >Edit Profile</a
-          >
+
+          
+          
         </div>
+
+
       </div>
 
+      
+      <!-- remove this
       <div class="mb-5">
         <a href="/posts/new" class="btn btn-sm btn-dark">Add Post</a>
       </div>
+
 
       <div class="row g-1">
         <% userData.posts.forEach((post) => { %>
@@ -111,5 +121,6 @@
         <% }) %>
       </div>
     </div>
+    <%- include("../partials/footer") %>
   </body>
 </html>
