@@ -15,6 +15,11 @@ const postSchema = mongoose.Schema({
     type: Array,
     default: []
   },
+  favorited:{
+    type: Array,
+    default: []
+  },
+
   date: {
     type: Date,
     default: Date.now

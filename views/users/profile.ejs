@@ -102,14 +102,15 @@
       
       <!-- remove this
       <div class="mb-5">
-        <a href="/post/new" class="btn btn-sm btn-dark">Add Post</a>
-      </div> -->
+        <a href="/posts/new" class="btn btn-sm btn-dark">Add Post</a>
+      </div>
+
 
       <div class="row g-1">
         <% userData.posts.forEach((post) => { %>
         <div class="col-12 col-sm-6 col-md-4">
           <div class="card">
-            <a href="/post/<%= post._id%>"
+            <a href="/posts/<%= post._id%>"
               ><img
                 src="/uploads/<%= post.picture %>"
                 class="card-img-top"

@@ -1,10 +1,9 @@
+
 <h2>All Posts</h2>
-<ul>
-<% posts.forEach(post => { %>
-<li>
-<a href="/posts/<%= post._id %>"><%= post.description %> img src= "<%= post.picture %>"</a>
-
-</li>
-<% }) %>
-
-</ul>
+  <% posts.forEach(post => { %>
+    <a href="/posts/<%= post._id %>">
+      <br><br>
+      <img src="/uploads/<%= post.picture %> " style="width:15em; height:15em;" /></a>
+      <p><%= post.description %> </p>
+  <% }) %>
+  
