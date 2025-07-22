@@ -29,8 +29,8 @@ exports.post_create_post = async (req, res) => {
 
 exports.post_index_get = async (req, res) => {
   try {
-    
-    res.render("posts/index.ejs")
+const posts = await Post.find().populate("user")    
+    res.render("posts/index.ejs", {posts})
   } catch (error) {
     console.error("An error has occurred while viewing posts!", error.message)
   }
