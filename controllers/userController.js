@@ -63,3 +63,15 @@ exports.user_update_put = async (req, res) => {
     console.error("An error has occurred rendering a profile!", error.message)
   }
 }
+
+exports.user_search_post = async (req, res) => {
+  const queryString = req.body.search
+  const queryStrings = queryString.split(" ")
+  allQueries = []
+  queryStrings.forEach((element) => {
+    allQueries.push({ username: { $regex: String(element) } })
+  })
+ const users = await User.find({$or : allQueries})
+    if(!users || users.length === 0) res.status(400).send({error : "No user was found"})
+    res.status(200).send(users)
+}
