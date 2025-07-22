@@ -14,8 +14,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-router.get('/new', postCtrl.post_create_get)
-router.post('/', upload.single('picture'), postCtrl.post_create_post)
+
+router.get("/new", postCtrl.post_create_get)
+
+router.post("/", upload.single("picture"),postCtrl.post_create_post)
+
 
 router.get('/', postCtrl.post_index_get)
 router.get('/:postId', postCtrl.post_show_get)
@@ -25,5 +28,7 @@ router.put('/:postId', postCtrl.post_update_put)
 
 router.delete('/:postId', postCtrl.post_delete_delete)
 router.post('/:postId/favorited-by/:userId', postCtrl.likes_create_post)
+
+router.post("/:postId/comments/new", postCtrl.comment_create_post)
 
 module.exports = router

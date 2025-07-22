@@ -34,7 +34,7 @@
             class="text-decoration-none text-black fs-5"
             >←</a
           >
-          <span class="fw-bold"><%= post.user.username %></span>
+          <span class="fw-bold"><%= user.username %></span>
           <% if (user._id === post.user._id.toString()) { %>
           <div class="dropdown">
             <a
@@ -77,6 +77,22 @@
 
         <div class="card-body">
           <p class="card-text"><%= post.description %></p>
+
+          <br />
+          <% 
+          if(comments.length!=0){ comments.forEach((comment)=> { %>
+          <p><strong> <%= user.username%></strong>  <%= comment.description %></p>
+          <% }) %> <% } %>
+
+          <form action="/post/<%= post._id %>/comments/new" method="post">
+            <input
+              type="textarea"
+              placeholder="write a comment"
+              name="comment"
+            />
+            <button type="submit">Submit!</button>
+          </form>
+
           <!-- views/listings/show.ejs -->
            <h2>Favorites</h2>
 <p>Favorited by <%= post.favorited.length %> people.</p>
@@ -86,6 +102,7 @@
 >
   <button type="submit" class="styled-btn"><i class="bi bi-balloon-heart"></i>Favorite it!</button>
 </form>
+
 
 
         </div>
