@@ -29,6 +29,6 @@ router.put('/:postId', postCtrl.post_update_put)
 router.delete('/:postId', postCtrl.post_delete_delete)
 router.post('/:postId/favorited-by/:userId', postCtrl.likes_create_post)
 
-router.post("/:postId/comments/new", postCtrl.comment_create_post)
 
+router.post("/:postId/comments/new", postCtrl.comment_create_post)
 module.exports = router

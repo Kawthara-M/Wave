@@ -5,13 +5,3 @@
 
 // Send back the user details that we filtered out from the array
 
-// const User = require("../models/User");
-
-// exports.user_search_get = async (req, res) => {
-//  const User = require("../models/User");
-
-// exports.user_search_get = async (req, res) => {
-//   try {
-//     const query = req.query.q;
-
-//   }
