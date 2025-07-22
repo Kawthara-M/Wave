@@ -10,6 +10,12 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  />
+    
     <style></style>
   </head>
   <body>
@@ -42,13 +48,13 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
-                <a class="dropdown-item" href="/post/<%= post._id %>/edit"
+                <a class="dropdown-item" href="/posts/<%= post._id %>/edit"
                   >Edit</a
                 >
               </li>
               <li>
                 <form
-                  action="/post/<%= post._id %>?_method=DELETE"
+                  action="/posts/<%= post._id %>?_method=DELETE"
                   method="POST"
                   class="d-inline"
                 >
@@ -71,6 +77,17 @@
 
         <div class="card-body">
           <p class="card-text"><%= post.description %></p>
+          <!-- views/listings/show.ejs -->
+           <h2>Favorites</h2>
+<p>Favorited by <%= post.favorited.length %> people.</p>
+<form
+  action="/posts/<%= post._id %>/favorited-by/<%= user._id %>"
+  method="POST"
+>
+  <button type="submit" class="styled-btn"><i class="bi bi-balloon-heart"></i>Favorite it!</button>
+</form>
+
+
         </div>
       </div>
     </div>
