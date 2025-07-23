@@ -27,8 +27,7 @@
       class="container vh-100 d-flex justify-content-center align-items-center"
     >
       <div style="max-width: 500px; width: 100%">
-        <%- include('../partials/postCard', { post, user, comments,
-        showComments: true }) %>
+        <%- include('../partials/postCard', { post, user, comments, showComments: true }) %>
 
         <form
           action="/posts/<%= post._id %>/comments/new"
