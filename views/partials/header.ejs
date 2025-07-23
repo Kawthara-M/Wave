@@ -1,5 +1,4 @@
 <head>
-
   <style>
     .navbar-custom {
       background: #fff;
@@ -9,17 +8,26 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
+      top: 0;
     }
 
-    .navbar-logo img {
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logo {
+      height: 4em;
       width: 10em;
-      height: 6em;
+      object-fit: contain;
     }
 
     .search-container {
       display: flex;
       align-items: center;
       position: relative;
+      flex-grow: 1;
+      justify-content: flex-end;
     }
 
     .search-container input[type="search"] {
@@ -47,9 +55,18 @@
       color: #000;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .search-container input[type="search"] {
+        width: 80%;
+      }
+
+      .search-container input[type="search"]:focus {
+        width: 100%;
+      }
+
       .search-container {
         width: 50%;
+        justify-content: flex-end;
       }
     }
   </style>
@@ -57,11 +74,10 @@
 
 <header class="navbar-custom">
   <div class="navbar-logo">
-    <a href="/">
-      <img src="/uploads/logo.png" alt="Wave Logo" />
-    </a>
+    <img src="/uploads/logo.png" class="header-logo" alt="Wave Logo" />
   </div>
 
+  <% if (user) { %>
   <form
     id="searchForm"
     action="/users/search"
@@ -76,4 +92,5 @@
     />
     <i class="fas fa-search"></i>
   </form>
+  <% } %>
 </header>

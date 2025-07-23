@@ -11,22 +11,48 @@
 
     <style>
       #profileImage {
-        border: solid 1px black;
+        border: 1px solid black;
         object-fit: cover;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 15px; 
       }
+
       .profile {
         background-color: rgb(239, 232, 232);
         padding: 30px;
-        border-radius: 10px;
+        max-width: 60vw;
+        margin: 40px auto;
+        text-align: center;
       }
+
+      .profile-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        justify-content: center;
+      }
+
+      .username-heading {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 1.8rem;
+        font-weight: 600;
+      }
+
       .form-control {
         font-size: 0.9rem;
       }
+
       .edit-form {
         background-color: #fff;
         padding: 20px;
         border: 1px solid #dbdbdb;
-        border-radius: 8px;
+        border-radius: 6px;
+        width: 350px;
+        max-width: 90vw;
+        margin: 10px auto 0; 
       }
     </style>
   </head>
@@ -34,17 +60,13 @@
     <%- include("../partials/header.ejs") %>
 
     <div class="container mt-5 profile shadow-lg">
-      <div class="d-flex align-items-center mb-4">
+      <div class="profile-header">
         <img
           src="/uploads/<%= currentUser.profileImage %>"
-          class="rounded-circle me-4"
-          style="width: 120px; height: 120px"
           alt="Profile Picture"
           id="profileImage"
         />
-        <div>
-          <h3 class="mb-1"><%= currentUser.username %></h3>
-        </div>
+        <h3 class="username-heading"><%= currentUser.username %></h3>
       </div>
 
       <div class="edit-form mt-4">
@@ -76,7 +98,6 @@
               id="username"
               value="<%= currentUser.username %>"
               required
-              
             />
           </div>
 
@@ -87,8 +108,8 @@
               class="form-control"
               name="email"
               id="email"
-              required
               value="<%= currentUser.email %>"
+              required
             />
           </div>
 
@@ -102,13 +123,14 @@
               value="<%= currentUser.bio %>"
             />
           </div>
+
           <span class="error" style="color: red">
-            <% if(error!=null) { %>
-            <p><%= error%></p>
-            <% }%>
+            <% if(error != null) { %>
+            <p><%= error %></p>
+            <% } %>
           </span>
 
-          <button type="submit" class="btn btn-dark">Update Profile</button>
+          <button type="submit" class="btn btn-dark w-100">Update Profile</button>
         </form>
       </div>
     </div>
