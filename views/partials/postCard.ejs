@@ -110,29 +110,31 @@
         </div>
         <% } %>
 
- <form
-  action="/posts/<%= post._id %>/favorited-by/<%= user._id %>"
-  method="POST"
-  class="mt-3"
->
-  <span class="likes" style="display: flex; align-items: center; gap: 10px;">
-    <button
-      type="submit"
-      class="styled-btn btn btn-outline-danger btn-sm"
-    >
-      <i class="bi bi-balloon-heart"></i>
-    </button>
+        <form
+          action="/posts/<%= post._id %>/favorited-by/<%= user._id %>"
+          method="POST"
+          class="mt-3"
+        >
+          <span
+            class="likes"
+            style="display: flex; align-items: center; gap: 10px"
+          >
+            <button
+              type="submit"
+              class="styled-btn btn btn-outline-danger btn-sm"
+            >
+              <i class="bi bi-balloon-heart"></i>
+            </button>
 
-    <span><%= post.favorited.length %></span>
+            <span><%= post.favorited.length %></span>
 
-    <% if (userHasFavorited) { %>
-      <span class="text-success">You've favorited!</span>
-    <% } else { %>
-      <span class="text-muted">You haven't favorited this.</span>
-    <% } %>
-  </span>
-</form>
-
+            <% if (userHasFavorited) { %>
+            <span class="text-success">You've favorited!</span>
+            <% } else { %>
+            <span class="text-muted">You haven't favorited this.</span>
+            <% } %>
+          </span>
+        </form>
       </div>
     </div>
   </body>
