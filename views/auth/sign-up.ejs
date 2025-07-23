@@ -70,12 +70,24 @@
 
       <div class="mb-3 text-start">
         <label for="email" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="remove" required/>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          id="remove"
+          required
+        />
       </div>
 
       <div class="mb-3 text-start">
         <label for="birthday" class="form-label">Birthday</label>
-        <input type="date" name="birthday" class="form-control" id="remove" required/>
+        <input
+          type="date"
+          name="birthday"
+          class="form-control"
+          id="remove"
+          required
+        />
       </div>
 
       <div class="mb-3 text-start">
@@ -84,7 +96,8 @@
           type="password"
           name="password"
           class="form-control"
-          id="remove" required
+          id="remove"
+          required
         />
       </div>
 
@@ -94,7 +107,8 @@
           type="password"
           name="confirmPassword"
           class="form-control"
-          id="remove" required
+          id="remove"
+          required
         />
       </div>
 
@@ -110,11 +124,13 @@
           required
         />
       </div>
-      <span class="error"><% if(error){%>
+      <span class="error" style="color:red;">
+        <% if(errors!=null)
+        { errors.forEach((error)=> { %>
+
         <p><%= error%></p>
-        
-        <% }%>
-        </span>
+        <% })}%>
+      </span>
 
       <button type="submit" class="btn btn-dark w-100">Submit</button>
     </form>

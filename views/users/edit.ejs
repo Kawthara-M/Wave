@@ -55,8 +55,16 @@
           enctype="multipart/form-data"
         >
           <div class="mb-3">
-            <label for="profileImageInput" class="form-label">Change Profile Picture</label>
-            <input type="file" class="form-control" name="profileImage" id="profileImageInput"required />
+            <label for="profileImageInput" class="form-label"
+              >Change Profile Picture</label
+            >
+            <input
+              type="file"
+              class="form-control"
+              name="profileImage"
+              id="profileImageInput"
+              required
+            />
           </div>
 
           <div class="mb-3">
@@ -93,6 +101,11 @@
               value="<%= currentUser.bio %>"
             />
           </div>
+          <span class="error" style="color: red">
+            <% if(errors!=null) { errors.forEach((error)=>{ %>
+            <p><%= error%></p>
+            <% })}%>
+          </span>
 
           <button type="submit" class="btn btn-dark">Update Profile</button>
         </form>

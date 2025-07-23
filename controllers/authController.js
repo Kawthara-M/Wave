@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt")
 
 exports.auth_signup_get = async (req, res) => {
   try {
-    res.render("./auth/sign-up.ejs", { error: null })
+    res.render("./auth/sign-up.ejs", { errors: null })
   } catch (error) {
     console.error("An error has occurred signing up a user!", error.message)
   }
@@ -16,39 +16,37 @@ exports.auth_signup_post = async (req, res) => {
     const userInDatabase = await User.findOne({ username: req.body.username })
     const today = new Date()
     const birthday = new Date(req.body.birthday)
-    let error=[]
+    let errors = []
 
     if (today.getFullYear() - birthday.getFullYear() < 18) {
-      return res.render("./auth/sign-up.ejs", {
-        error: "Wave platform is for ages over 18! See you later",
-      })
+      errors.push("Wave platform is for ages over 18! See you later")
     }
     if (userInDatabase) {
-      return res.render("./auth/sign-up.ejs", {
-        error: "Username already taken",
-      })
+      errors.push("Username already taken")
     }
     if (!validator.isEmail(req.body.email)) {
-      return res.render("./auth/sign-up.ejs", {
-        error: "Invalid email",
-      })
+      errors.push("Invalid email")
     }
     if (!validatePassword(req.body.password)) {
-      return res.render("./auth/sign-up.ejs", {
-        error: "Weak Password! please follow Wave password policy:",
-      })
+      errors.push(
+        "Weak Password! Have a mix of capital and lower letters, digits, and unique symbols"
+      )
     }
 
     if (req.body.password !== req.body.confirmPassword) {
-      return res.render("./auth/sign-up.ejs", {
-        error: "Username and Password shouldn't be the same! That's not safe.",
-      })
+      errors.push(
+        "Username and Password shouldn't be the same! That's not safe."
+      )
     }
     if (req.body.password == req.body.username) {
-      return res.render("./auth/sign-up.ejs", {
-        error: "Username and Password shouldn't be the same! That's not safe.",
-      })
+      errors.push(
+        "Username and Password shouldn't be the same! That's not safe."
+      )
     }
+    if (errors.length > 0) {
+      return res.render("./auth/sign-up.ejs", { errors })
+    }
+
     const hashedPassword = bcrypt.hashSync(req.body.password, 10)
     req.body.password = hashedPassword
     const user = await User.create({
@@ -58,7 +56,7 @@ exports.auth_signup_post = async (req, res) => {
       birthday: req.body.birthday,
       profileImage: req.file.filename,
     })
-    res.render("./auth/sign-in.ejs")
+    res.render("./auth/sign-in.ejs", { errors })
   } catch (error) {
     console.error("An error has occurred signing up a user!", error.message)
   }
@@ -66,7 +64,7 @@ exports.auth_signup_post = async (req, res) => {
 
 exports.auth_signin_get = async (req, res) => {
   try {
-    res.render("./auth/sign-in.ejs")
+    res.render("./auth/sign-in.ejs", { error: null })
   } catch (error) {
     console.error("An error has occurred signing in a user!", error.message)
   }
@@ -74,9 +72,11 @@ exports.auth_signin_get = async (req, res) => {
 exports.auth_signin_post = async (req, res) => {
   try {
     const userInDB = await User.findOne({ username: req.body.username })
+    let error = ""
 
     if (!userInDB) {
-      return res.send("Login failed, try again, user dont exist")
+      error = "Login failed, try again!"
+      res.render("./auth/sign-in.ejs", { error })
     }
 
     const validPassword = bcrypt.compareSync(
@@ -86,14 +86,15 @@ exports.auth_signin_post = async (req, res) => {
 
     // If password is incorrect
     if (!validPassword) {
-      return res.send("Login failed, try again")
+      error = "Login failed, try again"
+      res.render("./auth/sign-in.ejs", { error })
+    } else {
+      req.session.user = {
+        username: userInDB.username,
+        _id: userInDB._id,
+      }
+      res.redirect(`../users/${req.session.user._id}`)
     }
-
-    req.session.user = {
-      username: userInDB.username,
-      _id: userInDB._id,
-    }
-    res.redirect(`../users/${req.session.user._id}`)
   } catch (error) {
     console.error("An error has occurred signing in a user!", error.message)
   }
@@ -111,7 +112,8 @@ exports.auth_signout_get = async (req, res) => {
 exports.pass_edit_get = async (req, res) => {
   try {
     const userInDB = await User.findById(req.params.id)
-    res.render("./auth/update-password.ejs", { userInDB })
+    res.render(`auth/update-password.ejs`, { user: userInDB, errors: null })
+
   } catch (error) {
     console.error(
       "An error has occurred while directing user to update password form!",
@@ -123,32 +125,46 @@ exports.pass_edit_get = async (req, res) => {
 exports.pass_update_put = async (req, res) => {
   try {
     const userInDB = await User.findById(req.params.id)
-
+    
+    let errors = []
+    console.log(errors)
     if (!userInDB) {
-      return res.send("No user with that ID exists!")
+      errors.push("No user with that ID exists!")
+      //  return res.send("")
     }
-
     const validPassword = bcrypt.compareSync(
       req.body.oldPassword,
       userInDB.password
     )
-    if (!validPassword) {
-      return res.send("Your old password is not correct! Please try again.")
-    }
 
+    if (!validPassword) {
+      errors.push("Your old password is not correct! Please try again.")
+      //  return res.send(".")
+    }
     if (!validatePassword(req.body.newPassword)) {
-      return res.send("Weak Password! please follow Wave password policy:") // What's the policy?
+      errors.push(
+        "Weak Password! Use a mix of lower & capital letters, digits, and unique character!"
+      )
+      // return res.send( "" )
     }
 
     if (req.body.newPassword !== req.body.confirmPassword) {
-      return res.send("Password and Confirm Password must match!")
+      errors.push("Password and Confirm Password must match!")
+      //  return res.send("")
     }
 
-    const hashedPassword = bcrypt.hashSync(req.body.newPassword, 12)
+    if (errors.length > 0) {
+
+      res.render(`auth/update-password`, { user: userInDB, errors })
+    } else {
+      const hashedPassword = bcrypt.hashSync(req.body.newPassword, 12)
     userInDB.password = hashedPassword
     await userInDB.save()
 
-    res.render("./users/profile.ejs", { userInDB })
+    res.redirect(`/users/${userInDB._id}`)
+    }
+
+    
   } catch (error) {
     console.error(
       "An error has occurred updating a user's password!",
