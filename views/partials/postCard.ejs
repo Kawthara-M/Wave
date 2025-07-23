@@ -105,6 +105,17 @@
           <i class="bi bi-balloon-heart"></i>
         </button>
         <p class="mb-0 ms-2"><%= post.favorited.length %></p>
+<!-- views/listings/show.ejs -->
+
+  <br><h1>Favorites</h1>
+  <p>Favorited by <%= numberOfFollowers %> people.</p>
+
+  <% if (userHasFavorited) { %>
+  <p>You've favorited!</p>
+  <% } else { %>
+  <p>You haven't favorited this.</p>
+  <% } %>
+
       </span>
     </form>
   </div>
