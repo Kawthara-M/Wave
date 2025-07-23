@@ -67,6 +67,22 @@ exports.user_update_put = async (req, res) => {
   }
 }
 
+exports.user_delete_delete = async (req, res) => {
+  try {
+    const userId = req.session.userId
+
+    await User.findByIdAndDelete(userId)
+    req.session.destroy()
+
+    res.redirect("/auth/sign-up")
+  } catch (error) {
+    console.error("Error deleting user:", error)
+    return res
+      .status(500)
+      .json({ message: "Server error. Unable to delete account." })
+  }
+}
+
 exports.user_search_post = async (req, res) => {
   try {
     const queryString = req.body.search
