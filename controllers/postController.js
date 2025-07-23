@@ -42,7 +42,7 @@ exports.post_index_get = async (req, res) => {
       showComments: false,
       userHasFavorited,
     })
-    //  res.render("posts/index.ejs", { posts, showComments: false })
+  
   } catch (error) {
     console.error("An error has occurred while viewing posts!", error.message)
   }
@@ -92,7 +92,6 @@ exports.post_edit_get = async (req, res) => {
 exports.post_update_put = async (req, res) => {
   try {
     const post = await Post.findByIdAndUpdate(req.params.postId, req.body)
-    console.log(req.body.description)
     res.redirect(`/posts/${post._id}`)
   } catch (error) {
     console.error("An error has occurred updating a post!", error.message)
@@ -138,7 +137,6 @@ exports.likes_create_post = async (req, res) => {
     })
     res.redirect(`/posts/${req.params.postId}`)
   } catch (error) {
-    console.log(error)
-    res.redirect("/")
+    console.error("An error has occurred liking a post!", error.message)
   }
 }

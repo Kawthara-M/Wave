@@ -42,7 +42,8 @@ exports.user_update_put = async (req, res) => {
     let error = "username is already taken"
     const user = await User.findById(req.session.user._id)
     const userInDB = await User.find({ username: req.body.username })
-    if (userInDB.length>0) {
+    if (userInDB.length > 0 &&
+  !userInDB[0]._id.equals(req.session.user._id)) {
       res.render("./users/edit.ejs", { error, currentUser: user })
     } else {
       req.body.profileImage = req.file.filename
@@ -64,8 +65,6 @@ exports.user_update_put = async (req, res) => {
         posts: posts,
       }
 
-      const loggedInUserId = userData._id
-
       await currentUser.save()
       res.redirect(`/users/${user._id}`)
     }
@@ -76,7 +75,6 @@ exports.user_update_put = async (req, res) => {
 
 exports.user_delete_delete = async (req, res) => {
   try {
-    console.log("reached")
     const userId = req.params.userId
 
     await User.findByIdAndDelete(userId)
@@ -85,9 +83,6 @@ exports.user_delete_delete = async (req, res) => {
     res.redirect("/auth/sign-up")
   } catch (error) {
     console.error("Error deleting user:", error)
-    return res
-      .status(500)
-      .json({ message: "Server error. Unable to delete account." })
   }
 }
 
@@ -100,9 +95,11 @@ exports.user_search_post = async (req, res) => {
       allQueries.push({ username: { $regex: String(element) } })
     })
     const users = await User.find({ $or: allQueries })
-    if (!users || users.length === 0)
+    if (!users || users.length === 0){
       res.status(400).send({ error: "No user was found" })
+    }
 
+    
     const firstUser = users[0]
     res.redirect(`/users/${firstUser._id}`)
   } catch (error) {
