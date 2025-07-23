@@ -1,4 +1,5 @@
 <head>
+  <title>Sign up</title>
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
@@ -43,16 +44,26 @@
       justify-content: space-around;
     }
 
-    #remove {
-      outline: none;
-      box-shadow: none;
-    }
     .logo {
       position: absolute;
       top: 1px;
       left: 1em;
       width: 10em;
       height: 10em;
+    }
+    .no-outline {
+      outline: none;
+      box-shadow: none;
+    }
+    input {
+      border-color: black;
+    }
+    .form-control:focus {
+      border-color: #000;
+      color: #000;
+      background-color: #fff;
+      outline: none;
+      box-shadow: none;
     }
   </style>
 </head>
@@ -65,7 +76,7 @@
     <form action="/auth/sign-up" method="post" enctype="multipart/form-data">
       <div class="mb-3 text-start">
         <label for="username" class="form-label">Username</label>
-        <input type="text" name="username" class="form-control" id="remove" />
+        <input type="text" name="username" class="form-control no-outline" />
       </div>
 
       <div class="mb-3 text-start">
@@ -73,8 +84,7 @@
         <input
           type="email"
           name="email"
-          class="form-control"
-          id="remove"
+          class="form-control no-outline"
           required
         />
       </div>
@@ -84,8 +94,7 @@
         <input
           type="date"
           name="birthday"
-          class="form-control"
-          id="remove"
+          class="form-control no-outline"
           required
         />
       </div>
@@ -95,8 +104,7 @@
         <input
           type="password"
           name="password"
-          class="form-control"
-          id="remove"
+          class="form-control no-outline"
           required
         />
       </div>
@@ -106,8 +114,7 @@
         <input
           type="password"
           name="confirmPassword"
-          class="form-control"
-          id="remove"
+          class="form-control no-outline"
           required
         />
       </div>
@@ -124,20 +131,19 @@
           required
         />
       </div>
-      <span class="error" style="color:red;">
-        <% if(errors!=null)
-        { errors.forEach((error)=> { %>
 
+      <span class="error" style="color: red">
+        <% if(errors!=null){ errors.forEach((error)=> { %>
         <p><%= error%></p>
         <% })}%>
       </span>
 
-      <button type="submit" class="btn btn-dark w-100">Submit</button>
+      <button type="submit" class="btn btn-dark w-100">Sign up</button>
     </form>
   </div>
 </div>
 
-<div class="card text-center" style="width: 30%">
+<div class="card text-center">
   <div class="card-body py-2">
     <small>Have an account? <a href="/auth/sign-in">Sign in</a></small>
   </div>

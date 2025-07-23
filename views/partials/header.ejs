@@ -1,59 +1,79 @@
 <head>
+
   <style>
     .navbar-custom {
-      height: 60px;
       background: #fff;
       border-bottom: 1px solid #ddd;
+      padding: 0 30px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 0 20px;
-      position: sticky;
-      top: 0;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
 
-    .logo {
-      font-weight: bold;
-      font-size: 20px;
-      color: #333;
+    .navbar-logo img {
+      width: 10em;
+      height: 6em;
     }
 
-    .search-icon {
-      font-size: 20px;
-      color: #555;
-      text-decoration: none;
+    .search-container {
+      display: flex;
+      align-items: center;
+      position: relative;
     }
 
-    .search-icon:hover {
+    .search-container input[type="search"] {
+      padding: 8px 35px 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 14px;
+      width: 300px;
+      transition: width 0.3s ease;
+    }
+
+    .search-container input[type="search"]:focus {
+      outline: none;
+      width: 350px;
+    }
+
+    .search-container i {
+      position: absolute;
+      right: 10px;
+      color: #888;
+      cursor: pointer;
+    }
+
+    .search-container i:hover {
       color: #000;
+    }
+
+    @media (max-width: 600px) {
+      .search-container {
+        width: 50%;
+      }
     }
   </style>
 </head>
-<header class="navbar-custom">
-  <span class="logo">
-    <nav>
-      <img src="/uploads/logo.png" class="logo" alt="Wave Logo" width="250px" height="150px">
-    </nav>
-  </span>
 
-  <form id="searchForm" action="./search" method="post" autocomplete="off" class="search-container">
+<header class="navbar-custom">
+  <div class="navbar-logo">
+    <a href="/">
+      <img src="/uploads/logo.png" alt="Wave Logo" />
+    </a>
+  </div>
+
+  <form
+    id="searchForm"
+    action="/users/search"
+    method="POST"
+    class="search-container"
+  >
     <input
       type="search"
       id="searchInput"
       name="search"
       placeholder="Search users..."
     />
-    
-      <i class="fas fa-search"></i>
-    
-    <div id="searchDropdown" class="dropdown-results"></div>
+    <i class="fas fa-search"></i>
   </form>
-
-  <div><p></p></div>
 </header>
-
-
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-/>

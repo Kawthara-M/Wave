@@ -15,7 +15,6 @@ const postSchema = mongoose.Schema(
     favorited: {
       type: Array,
       default: [],
-      unique: true
     },
     picture: { type: String },
     description: { type: String },

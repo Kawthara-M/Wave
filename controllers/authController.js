@@ -84,7 +84,6 @@ exports.auth_signin_post = async (req, res) => {
       userInDB.password
     )
 
-    // If password is incorrect
     if (!validPassword) {
       error = "Login failed, try again"
       res.render("./auth/sign-in.ejs", { error })

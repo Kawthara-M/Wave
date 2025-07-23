@@ -14,7 +14,7 @@
         border: solid 1px black;
       }
       .profile {
-        background-color: rgb(239, 232, 232);
+        background-color: rgb(241, 234, 234);
       }
       .card-img-top {
         width: 100%;
@@ -31,16 +31,13 @@
     <%- include("../partials/header.ejs") %>
     <div class="container mt-5 profile shadow-lg position-relative">
 
-<div class="container profile shadow-lg position-relative" style="padding-top: 60px;">
-
-     
+      <div class="container profile shadow-sm position-relative" style="padding-top: 30px;">
       <div class="dropdown position-absolute" style="top: 15px; right: 10px">
         <a
           href="#"
           role="button"
           id="settingsDropdown"
           data-bs-toggle="dropdown"
-          aria-expanded="false"
           title="Settings"
         >
           <img
@@ -49,20 +46,14 @@
             alt="setting icon"
           />
         </a>
-
         <ul
           class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="settingsDropdown"
         >
           <li>
             <a
               class="dropdown-item"
               href="/auth/<%= userData._id %>/update-password"
-              >Update Password</a
-            >
-          </li>
-          <li>
-            <a class="dropdown-item" href="/settings/theme">Theme Option</a> <!--should delete-->
+              >Update Password</a>
           </li>
           <li>
             <a href="/users/<%= userData._id %>/edit" class="dropdown-item"
@@ -76,7 +67,6 @@
             <form
               action="/users/<%= userData._id %>?_method=DELETE"
               method="POST"
-             
               style="margin: 0"
             >
               <button
@@ -106,7 +96,7 @@
           id="profileImage"
         />
         <div>
-          <h3 class="mb-1"><%= userData.username %></h3>
+          <h3 class="mb-1"><strong><%= userData.username %></strong></h3>
           <div class="d-flex mb-3 text-center">
             <div class="me-4">
               <strong><%= userData.posts.length %></strong>

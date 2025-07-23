@@ -42,8 +42,7 @@ exports.user_update_put = async (req, res) => {
     let error = "username is already taken"
     const user = await User.findById(req.session.user._id)
     const userInDB = await User.find({ username: req.body.username })
-    if (userInDB.length > 0 &&
-  !userInDB[0]._id.equals(req.session.user._id)) {
+    if (userInDB.length > 0 && !userInDB[0]._id.equals(req.session.user._id)) {
       res.render("./users/edit.ejs", { error, currentUser: user })
     } else {
       req.body.profileImage = req.file.filename
@@ -95,11 +94,10 @@ exports.user_search_post = async (req, res) => {
       allQueries.push({ username: { $regex: String(element) } })
     })
     const users = await User.find({ $or: allQueries })
-    if (!users || users.length === 0){
+    if (!users || users.length === 0) {
       res.status(400).send({ error: "No user was found" })
     }
 
-    
     const firstUser = users[0]
     res.redirect(`/users/${firstUser._id}`)
   } catch (error) {
