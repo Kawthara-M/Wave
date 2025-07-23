@@ -5,107 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Post</title>
 
-    <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
 
     <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-  />
-    
-    <style></style>
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <style>
+      .likes {
+        display: flex;
+        align-items: center;
+      }
+    </style>
   </head>
   <body>
     <div
       class="container vh-100 d-flex justify-content-center align-items-center"
     >
-      <div
-        class="card shadow-sm"
-        style="max-width: 500px; width: 100%; min-height: 250px"
-      >
-        <div
-          class="card-header d-flex justify-content-between align-items-center bg-white border-0 pb-0"
+      <div style="max-width: 500px; width: 100%">
+        <%- include('../partials/postCard', { post, user, comments,
+        showComments: true }) %>
+
+        <form
+          action="/posts/<%= post._id %>/comments/new"
+          method="post"
+          class="mt-3 d-flex gap-2"
         >
-          <a
-            href="javascript:history.back()"
-            class="text-decoration-none text-black fs-5"
-            >←</a
-          >
-          <span class="fw-bold"><%= user.username %></span>
-          <% if (user._id === post.user._id.toString()) { %>
-          <div class="dropdown">
-            <a
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              class="text-dark text-decoration-none"
-            >
-              &#x22EE;
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li>
-                <a class="dropdown-item" href="/posts/<%= post._id %>/edit"
-                  >Edit</a
-                >
-              </li>
-              <li>
-                <form
-                  action="/posts/<%= post._id %>?_method=DELETE"
-                  method="POST"
-                  class="d-inline"
-                >
-                  <button type="submit" class="dropdown-item text-danger">
-                    Delete
-                  </button>
-                </form>
-              </li>
-            </ul>
-          </div>
-          <% } %>
-        </div>
-
-        <img
-          src="/uploads/<%= post.picture %>"
-          class="card-img-top"
-          alt="Post Image"
-          style="height: 15em"
-        />
-
-        <div class="card-body">
-          <p class="card-text"><%= post.description %></p>
-
-          <br />
-          <% 
-          if(comments.length!=0){ comments.forEach((comment)=> { %>
-          <p><strong> <%= user.username%></strong>  <%= comment.description %></p>
-          <% }) %> <% } %>
-
-          <form action="/post/<%= post._id %>/comments/new" method="post">
-            <input
-              type="textarea"
-              placeholder="write a comment"
-              name="comment"
-            />
-            <button type="submit">Submit!</button>
-          </form>
-
-          <!-- views/listings/show.ejs -->
-           <h2>Favorites</h2>
-<p>Favorited by <%= post.favorited.length %> people.</p>
-<form
-  action="/posts/<%= post._id %>/favorited-by/<%= user._id %>"
-  method="POST"
->
-  <button type="submit" class="styled-btn"><i class="bi bi-balloon-heart"></i>Favorite it!</button>
-</form>
-
-
-
-        </div>
+          <input
+            type="text"
+            placeholder="Write a comment"
+            name="comment"
+            class="form-control"
+            required
+          />
+          <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
       </div>
     </div>
 
