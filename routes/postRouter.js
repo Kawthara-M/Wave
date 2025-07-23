@@ -22,7 +22,7 @@ router.get("/", postCtrl.post_index_get)
 router.get("/:postId", postCtrl.post_show_get)
 
 router.get("/:postId/edit", postCtrl.post_edit_get)
-router.put("/:postId", postCtrl.post_update_put)
+router.put("/:postId", upload.single("picture"),postCtrl.post_update_put)
 
 router.delete("/:postId", postCtrl.post_delete_delete)
 router.post("/:postId/favorited-by/:userId", postCtrl.likes_create_post)
