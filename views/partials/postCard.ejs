@@ -15,6 +15,37 @@
       >Posted by <strong><%= post.user.username %></strong></small
     >
   </div>
+            <% if (user._id === post.user._id.toString()) { %>
+          <div class="dropdown">
+            <a
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              class="text-dark text-decoration-none"
+            >
+              &#x22EE;
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="/posts/<%= post._id %>/edit"
+                  >Edit</a
+                >
+              </li>
+              <li>
+                <form
+                  action="/posts/<%= post._id %>?_method=DELETE"
+                  method="POST"
+                  class="d-inline"
+                >
+                  <button type="submit" class="dropdown-item text-danger">
+                    Delete
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </div>
+          <% } %>
   <a href="/posts/<%= post._id %>">
     <img
       src="/uploads/<%= post.picture %>"
