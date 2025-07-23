@@ -37,7 +37,7 @@ The new user will be created and stored in the datebase, if not an error message
 
 - Existing user will sign-in by entering the sign-in credentials, if the credential are correct and exist in the database, the user can start user session and will be redirected to the profile page if not an error message will be displayed.
 
-- The signed-in user can add and submit a new post, the post will than saved in the database with the user Id, updating the homepage with the new post, as well as the option to delete it.
+- The signed-in user can add and submit a new post, the post will than saved in the database with the user Id, updating the homepage with the new post, as well as the option to delete it and to Sign out.
 
 - The user can like other posts and add comments as well.
 
@@ -45,7 +45,6 @@ The new user will be created and stored in the datebase, if not an error message
 
 - In the user's profile, it will display the user's profile image, bio, and posts, also it will provide edit profile option to the user.
 
-- The user 
 
 
 ## Wireframes
@@ -65,6 +64,7 @@ The new user will be created and stored in the datebase, if not an error message
   - Adding following and followers feature
 
 ### **Attributions**
-[bootstrap](https://getbootstrap.com/)
-
+[bootstrap](https://getbootstrap.com/) |
+[W3Schools](https://www.w3schools.com/) |
+[Figma](https://www.figma.com/)
 ---
