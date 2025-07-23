@@ -16,36 +16,36 @@ exports.auth_signup_post = async (req, res) => {
     const userInDatabase = await User.findOne({ username: req.body.username })
     const today = new Date()
     const birthday = new Date(req.body.birthday)
-    let error
+    let error=[]
 
     if (today.getFullYear() - birthday.getFullYear() < 18) {
-    return  res.render("./auth/sign-up.ejs", {
+      return res.render("./auth/sign-up.ejs", {
         error: "Wave platform is for ages over 18! See you later",
       })
     }
     if (userInDatabase) {
-     return res.render("./auth/sign-up.ejs", {
+      return res.render("./auth/sign-up.ejs", {
         error: "Username already taken",
       })
     }
     if (!validator.isEmail(req.body.email)) {
-     return res.render("./auth/sign-up.ejs", {
+      return res.render("./auth/sign-up.ejs", {
         error: "Invalid email",
       })
     }
     if (!validatePassword(req.body.password)) {
-    return  res.render("./auth/sign-up.ejs", {
+      return res.render("./auth/sign-up.ejs", {
         error: "Weak Password! please follow Wave password policy:",
       })
     }
 
     if (req.body.password !== req.body.confirmPassword) {
-    return  res.render("./auth/sign-up.ejs", {
+      return res.render("./auth/sign-up.ejs", {
         error: "Username and Password shouldn't be the same! That's not safe.",
       })
     }
     if (req.body.password == req.body.username) {
-    return  res.render("./auth/sign-up.ejs", {
+      return res.render("./auth/sign-up.ejs", {
         error: "Username and Password shouldn't be the same! That's not safe.",
       })
     }

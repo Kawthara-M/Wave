@@ -69,7 +69,8 @@ exports.user_update_put = async (req, res) => {
 
 exports.user_delete_delete = async (req, res) => {
   try {
-    const userId = req.session.userId
+    console.log("reached")
+    const userId = req.params.userId
 
     await User.findByIdAndDelete(userId)
     req.session.destroy()
