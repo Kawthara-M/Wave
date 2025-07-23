@@ -75,7 +75,7 @@
               name="username"
               id="username"
               required
-              value="<%= currentUser.username %>"
+              
             />
           </div>
 
@@ -102,9 +102,9 @@
             />
           </div>
           <span class="error" style="color: red">
-            <% if(errors!=null) { errors.forEach((error)=>{ %>
+            <% if(error!=null) { %>
             <p><%= error%></p>
-            <% })}%>
+            <% }%>
           </span>
 
           <button type="submit" class="btn btn-dark">Update Profile</button>

@@ -56,7 +56,7 @@ exports.auth_signup_post = async (req, res) => {
       birthday: req.body.birthday,
       profileImage: req.file.filename,
     })
-    res.render("./auth/sign-in.ejs", { errors })
+    res.render("./auth/sign-in.ejs", { error: null })
   } catch (error) {
     console.error("An error has occurred signing up a user!", error.message)
   }
@@ -113,7 +113,6 @@ exports.pass_edit_get = async (req, res) => {
   try {
     const userInDB = await User.findById(req.params.id)
     res.render(`auth/update-password.ejs`, { user: userInDB, errors: null })
-
   } catch (error) {
     console.error(
       "An error has occurred while directing user to update password form!",
@@ -125,12 +124,10 @@ exports.pass_edit_get = async (req, res) => {
 exports.pass_update_put = async (req, res) => {
   try {
     const userInDB = await User.findById(req.params.id)
-    
+
     let errors = []
-    console.log(errors)
     if (!userInDB) {
       errors.push("No user with that ID exists!")
-      //  return res.send("")
     }
     const validPassword = bcrypt.compareSync(
       req.body.oldPassword,
@@ -139,32 +136,26 @@ exports.pass_update_put = async (req, res) => {
 
     if (!validPassword) {
       errors.push("Your old password is not correct! Please try again.")
-      //  return res.send(".")
     }
     if (!validatePassword(req.body.newPassword)) {
       errors.push(
         "Weak Password! Use a mix of lower & capital letters, digits, and unique character!"
       )
-      // return res.send( "" )
     }
 
     if (req.body.newPassword !== req.body.confirmPassword) {
       errors.push("Password and Confirm Password must match!")
-      //  return res.send("")
     }
 
     if (errors.length > 0) {
-
       res.render(`auth/update-password`, { user: userInDB, errors })
     } else {
       const hashedPassword = bcrypt.hashSync(req.body.newPassword, 12)
-    userInDB.password = hashedPassword
-    await userInDB.save()
+      userInDB.password = hashedPassword
+      await userInDB.save()
 
-    res.redirect(`/users/${userInDB._id}`)
+      res.redirect(`/users/${userInDB._id}`)
     }
-
-    
   } catch (error) {
     console.error(
       "An error has occurred updating a user's password!",
