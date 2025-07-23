@@ -1,17 +1,18 @@
-# Wave
+# 🌊 Wave 
+
 
 **Date:** July / 23/ 2025 <br>
 **By:** [Kawthar Mohammad](https://github.com/Kawthara-M) | [Malak Jasim](https://github.com/Malak1805) | [Jawad Hassan](https://github.com/Jawad-Hassan-J)
 
 ## Description
 
-'Wave', a platform designed to simulate a social media expirence, where users can post, like, and comment on other posts. Wave is an application of MEN Stack, implemented to demonstrate back-end development skills following MVC architectural pattern.<br>
+'Wave', a platform designed to simulate a social media expirence, where users can post updates, like content, and leave comments—mimicking the experience of a real-world social platform. It was built using the MEN Stack (MongoDB, Express, Node.js) to showcase back-end development skills, following the MVC architecture.<br>
 <div align="center">
-  <img src="images/logo.png" width="40%" height="100px" alt="Logo">
+  <img src="images/logo.png" width="40%" height="100px" alt="Wave Logo">
 </div>
 
 
-## Getting Started
+## 🚀 Getting Started
 
 To facilitate the development, several resources were generated throught the planning phase:
 
@@ -20,13 +21,13 @@ To facilitate the development, several resources were generated throught the pla
 - Collaborative Board: A board shared among team memebers to assign tasks and track prograss. | 
 [Trello Board](https://trello.com/invite/b/6878ea401d81c643973da674/ATTI68ab95fd58f27aeffe35be35fc66d27f6F816D14/social-media-trello) |
 
-## Technologies Used
+## 🛠 Technologies Used
 
 - MongoDB, Express, Node.js (MEN Stack)
 - Bootstrap
 - CSS
 
-## User Stories
+## 👥 User Stories
 
 
 - New User will sign-up and will provide the following input fields (username, email, password, birthday ), if all fields validated, 
@@ -44,15 +45,12 @@ The new user will be created and stored in the datebase, if not an error message
 
 
 
-## Wireframes
-**Home & Profile Previews**
-<br>
-<img src="images/home.jpg"  width="50%" height="auto" alt="Home preview"style="vertical-align:middle;">
-<br>
+## 🖼 Wireframes
+**Home & Profile Previews**  
+<img src="images/home.jpg" width="40%" height="40%" alt="Home preview">
 
-**Private Message & Search Previews**
-<br>
-<img src="images/privateAndSearch.jpg"  width="50%" height="auto" style="vertical-align:middle;">
+**Private Message & Search Previews**  
+<img src="images/privateAndSearch.jpg" width="40%" height="40%" alt="Private and Search preview">
 ---
 ### **Future Enhancements**
 - DRY Foundation
