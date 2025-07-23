@@ -71,10 +71,9 @@ exports.user_delete_delete = async (req, res) => {
     const userId = req.session.userId
 
     await User.findByIdAndDelete(userId)
+    req.session.destroy()
 
-   req.session.destroy()
-
-     res.redirect('/auth/sign-up')
+    res.redirect("/auth/sign-up")
   } catch (error) {
     console.error("Error deleting user:", error)
     return res
