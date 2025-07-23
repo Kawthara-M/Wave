@@ -30,24 +30,28 @@
   </style>
 </head>
 <header class="navbar-custom">
-  <span class="logo" ><nav><img src="/uploads/logo.png"class="logo" alt="Wave Logo" width="250px" height="150px"></nav>
-</span>
-  <a href="/search/form" class="search-icon"><i class="fas fa-search"></i></a>
+  <span class="logo">
+    <nav>
+      <img src="/uploads/logo.png" class="logo" alt="Wave Logo" width="250px" height="150px">
+    </nav>
+  </span>
 
-  <form id="searchForm" action="./search" method="post" autocomplete="off">
+  <form id="searchForm" action="./search" method="post" autocomplete="off" class="search-container">
     <input
       type="search"
       id="searchInput"
       name="search"
       placeholder="Search users..."
     />
+    
+      <i class="fas fa-search"></i>
+    
     <div id="searchDropdown" class="dropdown-results"></div>
   </form>
 
-  <div>
-    <p></p>
-  </div>
+  <div><p></p></div>
 </header>
+
 
 <link
   rel="stylesheet"
