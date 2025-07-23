@@ -31,7 +31,8 @@ exports.user_show_get = async (req, res) => {
 exports.user_edit_get = async (req, res) => {
   try {
     const currentUser = await User.findById(req.params.id)
-    res.render(`./users/edit.ejs`, currentUser)
+    console.log(currentUser)
+    res.render(`./users/edit.ejs`, {currentUser})
   } catch (error) {
     console.error("An error has occurred rendering a profile!", error.message)
   }

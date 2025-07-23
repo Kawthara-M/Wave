@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt")
 
 exports.auth_signup_get = async (req, res) => {
   try {
-    res.render("./auth/sign-up.ejs")
+    res.render("./auth/sign-up.ejs", { error: null })
   } catch (error) {
     console.error("An error has occurred signing up a user!", error.message)
   }
@@ -16,27 +16,38 @@ exports.auth_signup_post = async (req, res) => {
     const userInDatabase = await User.findOne({ username: req.body.username })
     const today = new Date()
     const birthday = new Date(req.body.birthday)
+    let error
 
     if (today.getFullYear() - birthday.getFullYear() < 18) {
-      return res.send("X platform is for ages of 18 and more!")
+    return  res.render("./auth/sign-up.ejs", {
+        error: "Wave platform is for ages over 18! See you later",
+      })
     }
     if (userInDatabase) {
-      return res.send("Username already taken!") //should be shown near username field
+     return res.render("./auth/sign-up.ejs", {
+        error: "Username already taken",
+      })
     }
     if (!validator.isEmail(req.body.email)) {
-      return res.send("Invalid email!") //should be shown near email field
+     return res.render("./auth/sign-up.ejs", {
+        error: "Invalid email",
+      })
     }
-    // if (!validatePassword(req.body.password)) {
-    //   return res.send("Weak Password! please follow -x- password policy:") // x replaced with project name
-    // }
+    if (!validatePassword(req.body.password)) {
+    return  res.render("./auth/sign-up.ejs", {
+        error: "Weak Password! please follow Wave password policy:",
+      })
+    }
 
     if (req.body.password !== req.body.confirmPassword) {
-      return res.send("Password and confirm password must match...")
+    return  res.render("./auth/sign-up.ejs", {
+        error: "Username and Password shouldn't be the same! That's not safe.",
+      })
     }
     if (req.body.password == req.body.username) {
-      return res.send(
-        "Username and Password shouldn't be the same! That's not safe."
-      )
+    return  res.render("./auth/sign-up.ejs", {
+        error: "Username and Password shouldn't be the same! That's not safe.",
+      })
     }
     const hashedPassword = bcrypt.hashSync(req.body.password, 10)
     req.body.password = hashedPassword

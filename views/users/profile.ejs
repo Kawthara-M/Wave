@@ -26,7 +26,7 @@
   <body>
     <%- include("../partials/header.ejs") %>
     <div class="container mt-5 profile shadow-lg position-relative">
-      <% if (loggedInUserId && loggedInUserId === userData._id.toString()) { %>
+     
       <div class="dropdown position-absolute" style="top: 15px; right: 10px">
         <a
           href="#"
@@ -67,7 +67,6 @@
           </li>
         </ul>
       </div>
-      <% } %>
 
       <div class="d-flex align-items-center mb-4">
         <img
