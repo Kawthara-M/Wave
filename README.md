@@ -5,7 +5,7 @@
 
 ## Description
 
-'X', a platform designed to simulate a social media expirence, where users can post, interact with other posts, and follow others. X is an application of MEN Stack, implemented to demonstrate back-end development skills following MVC architectural pattern.<br>
+'Wave', a platform designed to simulate a social media expirence, where users can post, interact with other posts, and follow others. Wave is an application of MEN Stack, implemented to demonstrate back-end development skills following MVC architectural pattern.<br>
 -- include image--
 
 ## Getting Started
@@ -19,7 +19,7 @@ To facilitate the development, several resources were generated throught the pla
 
 Upon the planning, development started and resulted in:
 
-| Deployed version of **[x]()** |
+| Deployed version of **[wave]()** |
 
 
 
@@ -30,7 +30,22 @@ Upon the planning, development started and resulted in:
 
 ## User Stories
 
-xxx
+
+- New User will sign-up and will provide the following input fields (username, email, password, birthday, ), if all fields validated, 
+The new user will be created and stored in the datebase, if not an error message will be displayed.
+
+
+- Existing user will sign-in by entering the sign-in credentials, if the credential are correct and exist in the database, the user can start user session and will be redirected to the profile page if not an error message will be displayed.
+
+- The signed-in user can add and submit a new post, the post will than saved in the database with the user Id, updating the homepage with the new post, as well as the option to delete it and to Sign out.
+
+- The user can like other posts and add comments as well.
+
+- If the user types in the search bar, it will display matching usernames in the database, if not it will not display anything.
+
+- In the user's profile, it will display the user's profile image, bio, and posts, also it will provide edit profile option to the user.
+
+
 
 ## Wireframes
 **Home & Profile Previews**
@@ -44,8 +59,12 @@ xxx
 
 ### **Future Enhancements**
 
----
+- Displaying other user's stories in the homepage
+ - Adding a private chat to the users to interact
+  - Adding following and followers feature
 
 ### **Attributions**
-
+[bootstrap](https://getbootstrap.com/) |
+[W3Schools](https://www.w3schools.com/) |
+[Figma](https://www.figma.com/)
 ---

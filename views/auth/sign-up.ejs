@@ -70,12 +70,12 @@
 
       <div class="mb-3 text-start">
         <label for="email" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="remove" />
+        <input type="email" name="email" class="form-control" id="remove" required/>
       </div>
 
       <div class="mb-3 text-start">
         <label for="birthday" class="form-label">Birthday</label>
-        <input type="date" name="birthday" class="form-control" id="remove" />
+        <input type="date" name="birthday" class="form-control" id="remove" required/>
       </div>
 
       <div class="mb-3 text-start">
@@ -84,7 +84,7 @@
           type="password"
           name="password"
           class="form-control"
-          id="remove"
+          id="remove" required
         />
       </div>
 
@@ -94,7 +94,7 @@
           type="password"
           name="confirmPassword"
           class="form-control"
-          id="remove"
+          id="remove" required
         />
       </div>
 
@@ -110,6 +110,11 @@
           required
         />
       </div>
+      <span class="error"><% if(error){%>
+        <p><%= error%></p>
+        
+        <% }%>
+        </span>
 
       <button type="submit" class="btn btn-dark w-100">Submit</button>
     </form>
