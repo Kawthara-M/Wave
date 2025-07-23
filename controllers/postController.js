@@ -41,15 +41,22 @@ exports.post_index_get = async (req, res) => {
 exports.post_show_get = async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId).populate("user")
+    
     const comments = await Comment.find({ post: req.params.postId }).populate(
       "user"
     )
+    const userHasFavorited = post.favorited.some((user) =>
+      user === req.session.user._id
+    );
+    const numberOfFollowers = post.favorited.length 
     post.comments = comments
     res.render("./posts/show.ejs", {
       user: req.session.user,
       post,
       comments,
       showComments: true,
+      userHasFavorited,
+      numberOfFollowers
     })
   } catch (error) {
     console.error(
@@ -115,7 +122,8 @@ exports.comment_delete_delete = async (req, res) => {
 exports.likes_create_post = async (req, res) => {
   try {
     await Post.findByIdAndUpdate(req.params.postId, {
-      $push: { favorited: req.params.userId },
+      $addToSet: { favorited: req.params.userId }
+      
     })
     res.redirect(`/posts/${req.params.postId}`)
   } catch (error) {
