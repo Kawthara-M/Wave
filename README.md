@@ -35,15 +35,18 @@ Upon the planning, development started and resulted in:
 The new user will be created and stored in the datebase, if not an error message will be displayed.
 
 
-- An existing user will sign-in by entering the sign-in credentials, if the credential are correct and exist in the database, the user can start user session and will be redirected to the home page if not an error message will be displayed.
+- Existing user will sign-in by entering the sign-in credentials, if the credential are correct and exist in the database, the user can start user session and will be redirected to the profile page if not an error message will be displayed.
 
 - The signed-in user can add and submit a new post, the post will than saved in the database with the user Id, updating the homepage with the new post, as well as the option to delete it.
 
-- The user can like other posts and follow other accounts also have the option to unlike and unfollow.
+- The user can like other posts and add comments as well.
 
 - If the user types in the search bar, it will display matching usernames in the database, if not it will not display anything.
 
 - In the user's profile, it will display the user's profile image, bio, and posts, also it will provide edit profile option to the user.
+
+- The user 
+
 
 ## Wireframes
 **Home & Profile Previews**
@@ -58,8 +61,10 @@ The new user will be created and stored in the datebase, if not an error message
 ### **Future Enhancements**
 
 - Displaying other user's stories in the homepage
- - Adding a private chat to the user's to interact
+ - Adding a private chat to the users to interact
+  - Adding following and followers feature
 
 ### **Attributions**
+[bootstrap](https://getbootstrap.com/)
 
 ---
