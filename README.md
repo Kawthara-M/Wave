@@ -1,12 +1,15 @@
-# Social Media
+# Wave
 
-**Date:** July / 17/ 2025 <br>
+**Date:** July / 23/ 2025 <br>
 **By:** [Kawthar Mohammad](https://github.com/Kawthara-M) | [Malak Jasim](https://github.com/Malak1805) | [Jawad Hassan](https://github.com/Jawad-Hassan-J)
 
 ## Description
 
-'Wave', a platform designed to simulate a social media expirence, where users can post, interact with other posts, and follow others. Wave is an application of MEN Stack, implemented to demonstrate back-end development skills following MVC architectural pattern.<br>
--- include image--
+'Wave', a platform designed to simulate a social media expirence, where users can post, like, and comment on other posts. Wave is an application of MEN Stack, implemented to demonstrate back-end development skills following MVC architectural pattern.<br>
+<div align="center">
+  <img src="images/logo.png" width="40%" height="100px" alt="Logo">
+</div>
+
 
 ## Getting Started
 
@@ -17,23 +20,17 @@ To facilitate the development, several resources were generated throught the pla
 - Collaborative Board: A board shared among team memebers to assign tasks and track prograss. | 
 [Trello Board](https://trello.com/invite/b/6878ea401d81c643973da674/ATTI68ab95fd58f27aeffe35be35fc66d27f6F816D14/social-media-trello) |
 
-Upon the planning, development started and resulted in:
-
-| Deployed version of **[wave]()** |
-
-
-
 ## Technologies Used
 
 - MongoDB, Express, Node.js (MEN Stack)
+- Bootstrap
 - CSS
 
 ## User Stories
 
 
-- New User will sign-up and will provide the following input fields (username, email, password, birthday, ), if all fields validated, 
+- New User will sign-up and will provide the following input fields (username, email, password, birthday ), if all fields validated, 
 The new user will be created and stored in the datebase, if not an error message will be displayed.
-
 
 - Existing user will sign-in by entering the sign-in credentials, if the credential are correct and exist in the database, the user can start user session and will be redirected to the profile page if not an error message will be displayed.
 
@@ -50,21 +47,24 @@ The new user will be created and stored in the datebase, if not an error message
 ## Wireframes
 **Home & Profile Previews**
 <br>
-<img src="images/home.jpg"  width="50%" height="auto" style="vertical-align:middle;">
+<img src="images/home.jpg"  width="50%" height="auto" alt="Home preview"style="vertical-align:middle;">
 <br>
 
 **Private Message & Search Previews**
 <br>
 <img src="images/privateAndSearch.jpg"  width="50%" height="auto" style="vertical-align:middle;">
-
+---
 ### **Future Enhancements**
-
+- DRY Foundation
+- Following feature
+- Improve search feature
 - Displaying other user's stories in the homepage
- - Adding a private chat to the users to interact
-  - Adding following and followers feature
-
+- Adding a private chat to the users to interact
+---
 ### **Attributions**
 [bootstrap](https://getbootstrap.com/) |
 [W3Schools](https://www.w3schools.com/) |
-[Figma](https://www.figma.com/)
+[Figma](https://www.figma.com/) |
+[Search Feature Guide](https://medium.com/@aniagudo.godson/running-a-simple-search-query-on-mongodb-atlas-using-express-nodejs-2-refining-search-queries-49949ce5c4a1)
+
 ---
