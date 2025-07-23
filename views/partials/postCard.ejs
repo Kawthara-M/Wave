@@ -35,20 +35,19 @@
             href="#"
             role="button"
             data-bs-toggle="dropdown"
-            aria-expanded="false"
             class="text-dark text-decoration-none dropdown-toggle"
           >
             &#x22EE;
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <a class="dropdown-item" href="/post/<%= post._id %>/edit"
+              <a class="dropdown-item" href="/posts/<%= post._id %>/edit"
                 >Edit</a
               >
             </li>
             <li>
               <form
-                action="/post/<%= post._id %>?_method=DELETE"
+                action="/posts/<%= post._id %>?_method=DELETE"
                 method="POST"
                 class="d-inline"
               >
